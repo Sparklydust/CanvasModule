@@ -4,4 +4,7 @@
    <FileRef
       location = "group:CanvasBlog/CanvasBlog.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:CanvasPlay/CanvasPlay.xcodeproj">
+   </FileRef>
 </Workspace>
