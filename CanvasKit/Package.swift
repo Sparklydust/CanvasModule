@@ -25,7 +25,7 @@ let package = Package(
         "CanvasKit",
         .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
       ],
-      exclude: ["Snapshots"]
+      exclude: ["__Snapshots__"]
     )
   ]
 )
