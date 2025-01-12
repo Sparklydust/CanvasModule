@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "7EE65D4A-E110-4C84-8982-15CF2D67D3AB",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "CanvasKitTests",
+        "name" : "CanvasKitTests"
+      }
+    }
+  ],
+  "version" : 1
+}
