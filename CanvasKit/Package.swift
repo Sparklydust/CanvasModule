@@ -14,7 +14,10 @@ let package = Package(
     .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.17.6")
   ],
   targets: [
-    .target(name: "CanvasKit"),
+    .target(
+      name: "CanvasKit",
+      resources: [.process("Resources")]
+    ),
     .testTarget(
       name: "CanvasKitTests",
       dependencies: ["CanvasKit"]
