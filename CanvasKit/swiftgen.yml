@@ -1,0 +1,13 @@
+# Generate code for font assets.
+#
+# - When building the package using Xcode, the file will be created in
+# the Fonts directory in ~/Library/Developer/Xcode/DerivedData.
+# - When building the package using `$ swift build` from the command line, the
+# file will be created in the `.build` directory in the package’s root directory.
+fonts:
+  inputs: Sources/CanvasKit/Resources/Fonts/
+  outputs:
+    templatePath: Sources/CanvasKit/Tools/SwiftGen/fonts-swift6.stencil
+    output: ${DERIVED_SOURCES_DIR}/CKFonts.swift
+    params:
+        publicAccess: true

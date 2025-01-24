@@ -1,5 +1,5 @@
 {
-  "originHash" : "6cce4859621be5a1eebd216d70cbb9663dd34a158dc8fc98e280bfcbc8082647",
+  "originHash" : "5dad2260089fa36cdba269f3a857aed347356244559fffa84c1558649952ad17",
   "pins" : [
     {
       "identity" : "swift-snapshot-testing",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "0687f71944021d616d34d922343dcef086855920",
         "version" : "600.0.1"
+      }
+    },
+    {
+      "identity" : "swiftgenplugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftGen/SwiftGenPlugin",
+      "state" : {
+        "revision" : "879b85a470cacd70c19e22eb7e11a3aed66f4068",
+        "version" : "6.6.2"
       }
     }
   ],

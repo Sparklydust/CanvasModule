@@ -1,0 +1,166 @@
+// Generated code using SwiftGen — https://github.com/SwiftGen/SwiftGen
+// swiftlint:disable all
+
+{% if families %}
+{% set accessModifier %}{% if param.publicAccess %}public{% else %}internal{% endif %}{% endset %}
+{% set fontType %}{{param.fontTypeName|default:"FontConvertible"}}{% endset %}
+#if os(macOS)
+  import AppKit.NSFont
+#elseif os(iOS) || os(tvOS) || os(watchOS)
+  import UIKit.UIFont
+#endif
+#if canImport(SwiftUI)
+  import SwiftUI
+#endif
+
+// MARK: - Fonts
+
+/// Represents all font families available in the project.
+{{accessModifier}} enum {{param.enumName|default:"FontFamily"}} {
+
+  {% for family in families %}
+  /// Represents the ``{{family.name}}`` font family and its associated styles.
+  {{accessModifier}} enum {{family.name|swiftIdentifier:"pretty"|escapeReservedKeywords}} {
+    {% for font in family.fonts %}
+    /// The `{{font.style}}` style of the ``{{family.name}}`` font family.
+    {{accessModifier}} static let {{font.style|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}} = {{fontType}}(name: "{{font.name}}", family: "{{family.name}}", path: "{{font.path|basename}}")
+    {% endfor %}
+    /// A collection of all font styles in the ``{{family.name}}`` font family.
+    {{accessModifier}} static let all: [{{fontType}}] = [{% for font in family.fonts %}{{font.style|swiftIdentifier:"pretty"|lowerFirstWord|escapeReservedKeywords}}{{ ", " if not forloop.last }}{% endfor %}]
+  }
+  {% endfor %}
+  /// A collection of all custom fonts in the project.
+  {{accessModifier}} static let allCustomFonts: [{{fontType}}] = [{% for family in families %}{{family.name|swiftIdentifier:"pretty"|escapeReservedKeywords}}.all{{ ", " if not forloop.last }}{% endfor %}].flatMap { $0 }
+
+  /// Registers all custom fonts in the project for use.
+  {{accessModifier}} static func registerAllCustomFonts() {
+    allCustomFonts.forEach { $0.register() }
+  }
+}
+
+// MARK: - FontConvertible
+
+/// Represents a font resource that can be registered and used in the application.
+{{accessModifier}} struct {{fontType}}: Sendable, Equatable {
+
+  /// The name of the font.
+  {{accessModifier}} let name: String
+  /// The font family name.
+  {{accessModifier}} let family: String
+  /// The resource path for the font.
+  {{accessModifier}} let path: String
+
+  #if os(macOS)
+  /// The platform-specific font type for macOS.
+  {{accessModifier}} typealias CKFont = NSFont
+  #elseif os(iOS) || os(tvOS) || os(watchOS)
+  /// The platform-specific font type for iOS, tvOS, and watchOS.
+  {{accessModifier}} typealias CKFont = UIFont
+  #endif
+
+  /// Initializes a font object with a given size.
+  /// - Parameter size: The size of the font.
+  /// - Returns: A ``CKFont`` object initialized with the font resource.
+  /// - Throws: A fatal error if the font cannot be initialized.
+  {{accessModifier}} func font(size: CGFloat) -> CKFont {
+    guard let font = CKFont(name: self.name, size: size)
+    else { fatalError("Unable to initialize font '\(name)' (\(family)).") }
+    return font
+  }
+
+  #if canImport(SwiftUI)
+  /// Creates a SwiftUI-compatible font with a specific size.
+  /// - Parameter size: The size of the font.
+  /// - Returns: A ``Font`` object for use in SwiftUI.
+  {{accessModifier}} func swiftUIFont(size: CGFloat) -> Font {
+    self.registerIfNeeded()
+    return .custom(self.name, size: size)
+  }
+
+  /// Creates a SwiftUI-compatible font with a specific size and text style.
+  /// - Parameters:
+  ///   - size: The size of the font.
+  ///   - textStyle: The associated text style for the font.
+  /// - Returns: A ``Font`` object for use in SwiftUI.
+  {{accessModifier}} func swiftUIFont(
+    size: CGFloat,
+    relativeTo textStyle: Font.TextStyle
+  ) -> Font {
+    self.registerIfNeeded()
+    return .custom(self.name, size: size, relativeTo: textStyle)
+  }
+  #endif
+
+  /// Registers the font with the system for use if not already done.
+  /// - Info: If the font is already registered, this method does nothing.
+  {{accessModifier}} func register() {
+    guard let url = url else { return }
+    CTFontManagerRegisterFontsForURL(url as CFURL, .process, .none)
+  }
+
+  /// Registers the font if it is not already registered.
+  fileprivate func registerIfNeeded() {
+    #if os(iOS) || os(tvOS) || os(watchOS)
+    let registeredFonts = UIFont.fontNames(forFamilyName: family)
+    if registeredFonts.isEmpty || !registeredFonts.contains(name) {
+      register()
+    }
+    #elseif os(macOS)
+    if let url = url, CTFontManagerGetScopeForURL(url as CFURL) == .none {
+      register()
+    }
+    #endif
+  }
+
+  /// The URL for the font resource in the application bundle.
+  fileprivate var url: URL? {
+    Bundle.module.url(forResource: path, withExtension: nil)
+  }
+}
+
+{{accessModifier}} extension {{fontType}}.CKFont {
+
+  /// Initializes a platform-specific font using a ``FontConvertible``.
+  /// - Parameters:
+  ///   - font: The ``FontConvertible`` to use.
+  ///   - size: The size of the font.
+  /// - Returns: A ``CKFont`` object if the font is successfully created.
+  convenience init?(font: {{fontType}}, size: CGFloat) {
+    font.registerIfNeeded()
+    guard let uiFont = Self(name: font.name, size: size) else { return nil }
+    self.init(descriptor: uiFont.fontDescriptor, size: size)
+  }
+}
+
+// MARK: - SwiftUI Font Extension
+#if canImport(SwiftUI)
+{{accessModifier}} extension Font {
+
+  /// Creates a SwiftUI-compatible font using a ``FontConvertible``.
+  /// - Parameters:
+  ///   - font: The ``FontConvertible`` to use.
+  ///   - size: The size of the font.
+  /// - Returns: A ``Font`` object for use in SwiftUI.
+  static func custom(_ font: {{fontType}}, size: CGFloat) -> Font {
+    font.registerIfNeeded()
+    return custom(font.name, size: size)
+  }
+
+  /// Creates a SwiftUI-compatible font with a specific size and text style.
+  /// - Parameters:
+  ///   - font: The ``FontConvertible`` to use.
+  ///   - size: The size of the font.
+  ///   - textStyle: The associated text style for the font.
+  /// - Returns: A ``Font`` object for use in SwiftUI.
+  static func custom(
+    _ font: {{fontType}},
+    size: CGFloat,
+    relativeTo textStyle: Font.TextStyle
+  ) -> Font {
+    font.registerIfNeeded()
+    return custom(font.name, size: size, relativeTo: textStyle)
+  }
+}
+#endif
+// swiftlint:enable all
+{% endif %}

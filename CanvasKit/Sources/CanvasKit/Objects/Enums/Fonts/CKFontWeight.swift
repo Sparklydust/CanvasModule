@@ -20,12 +20,12 @@ public enum CKFontWeight {
   ///
   /// This property provides the specific font name for the selected weight,
   /// ensuring consistency with the design system's font family.
-  var fontName: String {
+  var fontName: FontConvertible {
     switch self {
-    case .bold: "Urbanist-Bold"
-    case .medium: "Urbanist-Medium"
-    case .regular: "Urbanist-Regular"
-    case .semiBold: "Urbanist-SemiBold"
+    case .bold: FontFamily.Urbanist.bold
+    case .medium: FontFamily.Urbanist.medium
+    case .regular: FontFamily.Urbanist.regular
+    case .semiBold: FontFamily.Urbanist.semiBold
     }
   }
 }
