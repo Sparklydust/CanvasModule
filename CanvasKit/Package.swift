@@ -5,10 +5,15 @@ import PackageDescription
 let package = Package(
   name: "CanvasKit",
   platforms: [
-    .iOS(.v18)
+    .iOS(.v18),
+    .macOS(.v15)
   ],
   products: [
-    .library(name: "CanvasKit", targets: ["CanvasKit"])
+    .library(name: "CanvasKit", targets: ["CanvasKit"]),
+    .plugin(
+      name: "SnapshotsSymlink",
+      targets: ["SnapshotsSymlink"]
+    )
   ],
   dependencies: [
     .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.17.6"),
@@ -34,7 +39,18 @@ let package = Package(
         "CanvasKit",
         .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
       ],
-      exclude: ["__Snapshots__"]
+      plugins: [
+        .plugin(name: "ExcludeSnapshots")
+      ]
+    ),
+    .plugin(name: "SnapshotsSymlink",
+      capability: .buildTool(),
+      path: "Plugins/SnapshotsSimlink"
+    ),
+    .plugin(
+      name: "ExcludeSnapshots",
+      capability: .buildTool(),
+      path: "Plugins/ExcludeSnapshots"
     )
   ]
 )

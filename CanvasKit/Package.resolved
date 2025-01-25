@@ -1,5 +1,5 @@
 {
-  "originHash" : "a01d3d34b3b7cc55af65caf694b5e3500eacbe7e2ab01a069df4d007dabc9874",
+  "originHash" : "95ecc8071fd28172c271359a4e687e95327cd1b83edb60cbfb4f3e139d008e2f",
   "pins" : [
     {
       "identity" : "swift-snapshot-testing",

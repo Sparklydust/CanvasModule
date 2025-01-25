@@ -373,27 +373,3 @@ extension TypographyView {
 #Preview {
   TypographyView()
 }
-
-/// Displays information about a specific typography style and weight.
-private struct TypographyInfoView: View {
-
-  /// The font style to display.
-  let font: CKFontStyle
-  /// The weight of the font.
-  let weight: CKFontWeight?
-  /// The name of the typography style.
-  let title: String
-  /// A description of the style, including its weight and size.
-  let subtitle: String
-
-  var body: some View {
-    VStack(alignment: .leading) {
-      Text(title)
-        .ckFont(font, weight: weight)
-
-      Text(subtitle)
-        .ckFont(.callout)
-        .foregroundStyle(.ckGreyscale500)
-    }
-  }
-}

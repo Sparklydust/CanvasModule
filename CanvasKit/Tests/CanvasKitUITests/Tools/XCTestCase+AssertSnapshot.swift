@@ -17,27 +17,31 @@ public extension XCTestCase {
   ///   - view: The SwiftUI view to be snapshotted and tested.
   ///   - size: The frame size for the view. Defaults to iPhone 14 size (393x852).
   ///   - precision: The precision threshold for image comparison (default is 0.95).
-  ///   - ciPath: The path for storing snapshots when running on a CI environment.
-  ///   - record: A flag indicating whether to record a new reference snapshot (default is `false`).
   ///   - file: The source file where the assertion is called (default is the current file).
   ///   - testName: The name of the test method (default is the current function name).
   ///   - line: The line number where the assertion is called (default is the current line).
+  /// - Warning: Must be run with iPhone as the target destination. ``SnapshotTesting`` won't compile if it is
+  /// set on a mac.
   func assertSnapshot(
-    view: some View,
+    _ view: some View,
     size: CGSize = CGSize(width: 393, height: 852),
     precision: Float = 0.95,
-    ciPath: StaticString,
-    record: Bool = false,
     file: StaticString = #filePath,
     testName: String = #function,
     line: UInt = #line
   ) {
 
+    let snapshotsDirectory = URL(fileURLWithPath: "\(file)")
+      .deletingLastPathComponent()
+      .appendingPathComponent("__Snapshots__")
+      .appendingPathComponent(URL(fileURLWithPath: "\(file)").deletingPathExtension().lastPathComponent)
+      .path
+
     let failureMessage = SnapshotTesting.verifySnapshot(
       of: view.frame(width: size.width, height: size.height),
       as: .image(precision: precision),
-      record: record,
-      file: ProcessInfo.processInfo.environment["CI"] == "TRUE" ? ciPath : file,
+      snapshotDirectory: snapshotsDirectory,
+      file: file,
       testName: testName,
       line: line
     )

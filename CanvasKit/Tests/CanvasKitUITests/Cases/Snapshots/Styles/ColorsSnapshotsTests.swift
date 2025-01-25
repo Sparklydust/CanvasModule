@@ -2,14 +2,12 @@
 // Copyright © 2025 Roland Lariotte. Under the MIT License.
 //
 
-import XCTest
-import SwiftUI
 import SnapshotTesting
+import SwiftUI
+import XCTest
 @testable import CanvasKit
 
-final class ColorsSnapshotTests: XCTestCase {
-
-  let ci_path: StaticString = "/Volumes/workspace/repository/ci_scripts/resources/CanvasKit/CanvasKitUITests/Snapshots/ColorsSnapshotTests.swift"
+final class ColorsSnapshotsTests: XCTestCase {
 
   func testColors_primary_snapshotIsEqualToExpected() {
     var result: some View {
@@ -47,7 +45,7 @@ final class ColorsSnapshotTests: XCTestCase {
       .padding(.horizontal)
     }
 
-    assertSnapshot(view: result, ciPath: ci_path)
+    assertSnapshot(result)
   }
 
   func testColors_secondary_snapshotIsEqualToExpected() {
@@ -86,7 +84,7 @@ final class ColorsSnapshotTests: XCTestCase {
       .padding(.horizontal)
     }
 
-    assertSnapshot(view: result, ciPath: ci_path)
+    assertSnapshot(result)
   }
 
   func testColors_alertAndStatus_snapshotIsEqualToExpected() {
@@ -113,7 +111,7 @@ final class ColorsSnapshotTests: XCTestCase {
       .padding(.horizontal)
     }
 
-    assertSnapshot(view: result, ciPath: ci_path)
+    assertSnapshot(result)
   }
 
   func testColors_greyscale_snapshotIsEqualToExpected() {
@@ -152,7 +150,7 @@ final class ColorsSnapshotTests: XCTestCase {
       .padding(.horizontal)
     }
 
-    assertSnapshot(view: result, ciPath: ci_path)
+    assertSnapshot(result)
   }
 
   func testColors_gradients_snapshotIsEqualToExpected() {
@@ -185,7 +183,7 @@ final class ColorsSnapshotTests: XCTestCase {
       .padding(.horizontal)
     }
 
-    assertSnapshot(view: result, ciPath: ci_path)
+    assertSnapshot(result)
   }
 
   func testColors_dark_snapshotIsEqualToExpected() {
@@ -206,7 +204,7 @@ final class ColorsSnapshotTests: XCTestCase {
       .padding(.horizontal)
     }
 
-    assertSnapshot(view: result, ciPath: ci_path)
+    assertSnapshot(result)
   }
 
   func testColors_others_snapshotIsEqualToExpected() {
@@ -275,7 +273,7 @@ final class ColorsSnapshotTests: XCTestCase {
       .padding(.horizontal)
     }
 
-    assertSnapshot(view: result, ciPath: ci_path)
+    assertSnapshot(result)
   }
 
   func testColors_background_snapshotIsEqualToExpected() {
@@ -308,7 +306,7 @@ final class ColorsSnapshotTests: XCTestCase {
       .padding(.horizontal)
     }
 
-    assertSnapshot(view: result, ciPath: ci_path)
+    assertSnapshot(result)
   }
 
   func testColors_transparent_snapshotIsEqualToExpected() {
@@ -344,6 +342,6 @@ final class ColorsSnapshotTests: XCTestCase {
       .padding(.horizontal)
     }
 
-    assertSnapshot(view: result, ciPath: ci_path)
+    assertSnapshot(result)
   }
 }
