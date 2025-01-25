@@ -10,28 +10,31 @@ import SwiftUI
 struct ColorsView: View {
 
   var body: some View {
-    NavigationStack {
-      VStack {
-        Divider()
+    List {
+      SecondarySection("Primary") { primaryColors }
 
-        List {
-          Section("Primary") { primaryColors }
-          Section("Secondary") { secondaryColors }
-          Section("Alert & Status") { alertAndStatusColors }
-          Section("Grayscale") { grayscaleColors }
-          Section("Gradient") { gradientColors }
-          Section("Dark") { darkColors }
-          Section("Other") { otherColors }
-          Section("Background") { backgroundColors }
-          Section("Transparent") { transparentColors }
-        }
-        .listStyle(.plain)
-      }
-      .navigationBarTitleDisplayMode(.inline)
-      .navigationTitle("Colors")
-      .toolbarCloseButton()
+      SecondarySection("Secondary") { secondaryColors }
+
+      SecondarySection("Alert & Status") { alertAndStatusColors }
+
+      SecondarySection("Grayscale") { grayscaleColors }
+
+      SecondarySection("Gradient") { gradientColors }
+
+      SecondarySection("Dark") { darkColors }
+
+      SecondarySection("Other") { otherColors }
+
+      SecondarySection("Background") { backgroundColors }
+
+      SecondarySection("Transparent") { transparentColors }
     }
+    .listStyle(.plain)
+    .cpSecondaryNavigationStack(title: "Colors")
   }
+}
+
+extension ColorsView {
 
   // MARK: - Primary Colors
   private var primaryColors: some View {
@@ -219,8 +222,8 @@ struct ColorsView: View {
   // MARK: - Other Colors
   private var otherColors: some View {
     LazyVGrid(columns: [GridItem(.adaptive(minimum: 200))]) {
-      Color(.ckWhite)
-        .colorCard(label: "White")
+      Color(.ckRed)
+        .colorCard(label: "White", labelColor: .gray)
 
       Color(.ckBlack)
         .colorCard(label: "Black")
@@ -328,7 +331,7 @@ struct ColorsView: View {
 
       Color(.ckTransparentOrange)
         .colorCard(label: "Orange", labelColor: .gray)
-
+      
       Color(.ckTransparentGreen)
         .colorCard(label: "Green", labelColor: .gray)
 

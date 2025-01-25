@@ -4,10 +4,15 @@
 
 import SwiftUI
 
+/// Showcase the main ``CanvasKit`` design system view elements.
 struct ContentView: View {
 
   var body: some View {
-    ColorsView()
+    TabView {
+      Tab("Styles", systemImage: "paintpalette") {
+        StylesView()
+      }
+    }
   }
 }
 
