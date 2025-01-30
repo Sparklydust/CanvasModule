@@ -22,10 +22,9 @@ let package = Package(
   targets: [
     .target(
       name: "CanvasKit",
-      resources: [
-        .process("Resources")
-      ],
+      resources: [.process("Resources")],
       plugins: [
+        .plugin(name: "IconsProcessor"),
         .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin")
       ]
     ),
@@ -37,20 +36,30 @@ let package = Package(
       name: "CanvasKitUITests",
       dependencies: [
         "CanvasKit",
-        .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
+        .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
       ],
       plugins: [
         .plugin(name: "ExcludeSnapshots")
       ]
     ),
-    .plugin(name: "SnapshotsSymlink",
-      capability: .buildTool(),
-      path: "Plugins/SnapshotsSimlink"
+    .executableTarget(
+      name: "IconsProcessorExec",
+      path: "Executables/IconsProcessorExec"
     ),
     .plugin(
       name: "ExcludeSnapshots",
       capability: .buildTool(),
       path: "Plugins/ExcludeSnapshots"
+    ),
+    .plugin(
+      name: "IconsProcessor",
+      capability: .buildTool(),
+      dependencies: ["IconsProcessorExec"],
+      path: "Plugins/IconsProcessor"
+    ),
+    .plugin(name: "SnapshotsSymlink",
+      capability: .buildTool(),
+      path: "Plugins/SnapshotsSimlink"
     )
   ]
 )
