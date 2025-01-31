@@ -10,18 +10,20 @@ if arguments.count < 3 {
   print("Missing arguments `input` and `output` from `IconsProcessor` plugin.")
   exit(1)
 }
+
 let (input, output) = (arguments[1], arguments[2])
 
-/// Represents the data contents of an asset catalog json file.
+/// Represents the contents of an asset catalog entry.
 struct ContentsData: Decodable {
   let images: [Image]
 
+  /// Defines an image entry inside the asset catalog.
   struct Image: Decodable {
     let filename: String?
   }
 }
 
-/// Holds the generated Swift code for icons in the generated `CKIcons` file.
+/// Holds the generated Swift code for icons.
 var generatedCode = """
 //
 // Copyright © 2025 Roland Lariotte. Under the MIT License.
@@ -31,10 +33,15 @@ var generatedCode = """
 
 import SwiftUI
 
-extension Image {\n\n
+/// Enum representing all available icons in `Icons.xcassets`.
+enum CKIconAsset: String, CaseIterable {
+
+
 """
 
-// Scans `Icons.xcassets` for `.imageset` directories and generates `Image` constants.
+var enumCases: [String] = []
+
+/// Scans `Icons.xcassets` for `.imageset` directories and generates `Image` constants.
 try FileManager
   .default
   .subpathsOfDirectory(atPath: input)
@@ -56,18 +63,24 @@ try FileManager
       .deletingPathExtension()
       .lastPathComponent
 
-    // Formats the icon name to ensure proper casing.
+    /// Preserve original casing from asset name.
     let formattedBaseName = baseName
       .split(separator: " ")
       .map { $0.prefix(1).uppercased() + $0.dropFirst() }
       .joined()
 
-    generatedCode.append(
-      "  static let ck\(formattedBaseName) = Image(\"\(baseName)\", bundle: .module)\n\n"
-    )
+    /// Add the enum case with `rawValue`.
+    enumCases.append("  case \(formattedBaseName.prefix(1).lowercased())\(formattedBaseName.dropFirst())")
   }
 
-generatedCode.append("}\n") // Closes `extension Image`
+/// Append the enum cases and `var image: Image` property.
+generatedCode.append(enumCases.joined(separator: "\n"))
+generatedCode.append("""
 
-// Writes the generated Swift code to the output file.
+
+  var image: Image { Image(rawValue, bundle: .module) }
+}
+""")
+
+/// Writes the generated Swift code to the output file.
 try generatedCode.write(to: URL(fileURLWithPath: output), atomically: true, encoding: .utf8)

@@ -35,7 +35,7 @@ struct IconsProcessor: BuildToolPlugin {
         let input = assetCatalog.url
 
         /// Output path where the generated Swift file will be stored.
-        let output = context.pluginWorkDirectoryURL.appending(path: "CKIcons.swift")
+        let output = context.pluginWorkDirectoryURL.appending(path: "CKIconAsset.swift")
 
         /// Returns a build command to execute the `IconsProcessorExec` tool.
         return .buildCommand(
