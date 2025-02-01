@@ -34,14 +34,15 @@ var generatedCode = """
 import SwiftUI
 
 /// Enum representing all available icons in `Icons.xcassets`.
-enum CKIconAsset: String, CaseIterable {
+public enum CKIconAsset: String, CaseIterable {
 
 
 """
 
-var enumCases: [String] = []
+var brandIcons: Set<String> = []
+var styledIcons: Set<String> = [] // Tracks icons supporting Regular/Filled
 
-/// Scans `Icons.xcassets` for `.imageset` directories and generates `Image` constants.
+/// Scans `Icons.xcassets` for `.imageset` directories and categorizes icons.
 try FileManager
   .default
   .subpathsOfDirectory(atPath: input)
@@ -55,31 +56,86 @@ try FileManager
     let data = try Data(contentsOf: contentsURL)
     let contents = try JSONDecoder().decode(ContentsData.self, from: data)
 
-    let hasIcon = contents.images.filter { $0.filename != .none }.isEmpty == false
+    let hasIcon = contents.images.contains { $0.filename != nil }
     guard hasIcon else { return }
 
-    let baseName = contentsURL
-      .deletingLastPathComponent()
-      .deletingPathExtension()
-      .lastPathComponent
+    let pathComponents = item.split(separator: "/")
+    guard pathComponents.count >= 2 else { return } // Ensure folder structure exists
 
-    /// Preserve original casing from asset name.
-    let formattedBaseName = baseName
-      .split(separator: " ")
-      .map { $0.prefix(1).uppercased() + $0.dropFirst() }
-      .joined()
+    let folder = String(pathComponents[pathComponents.count - 2]) // Parent folder (Brands, Regular, Filled)
+    let baseName = String(pathComponents.last!).replacingOccurrences(of: ".imageset", with: "")
 
-    /// Add the enum case with `rawValue`.
-    enumCases.append("  case \(formattedBaseName.prefix(1).lowercased())\(formattedBaseName.dropFirst())")
+    /// Detects whether the icon is Regular or Filled
+    let isRegular = folder == "Regular"
+    let isFilled = folder == "Filled"
+
+    /// Removes `Regular` and `Filled` from the base name for consistency
+    let cleanName = baseName
+      .replacingOccurrences(of: "Regular", with: "")
+      .replacingOccurrences(of: "Filled", with: "")
+
+    let formattedBaseName = cleanName.prefix(1).lowercased() + cleanName.dropFirst()
+
+    if isRegular || isFilled {
+      styledIcons.insert(formattedBaseName) // Track icons with style support
+    }
+
+    // Always add case, ensuring it's not duplicated
+    brandIcons.insert(formattedBaseName)
   }
 
-/// Append the enum cases and `var image: Image` property.
-generatedCode.append(enumCases.joined(separator: "\n"))
+/// Append all icons (no duplicates)
+generatedCode.append(
+  brandIcons.sorted().map { "  case \($0)\n" }.joined()
+)
+
+generatedCode.append("""
+}
+
+/// Defines the available styles for ``CKIcon``.
+public enum CKIconStyle {
+
+  case regular, filled
+
+  /// Provides the correct suffix for the image name.
+  var suffix: String {
+    switch self {
+    case .regular: "Regular"
+    case .filled: "Filled"
+    }
+  }
+}
+
+extension CKIconAsset {
+
+  /// Returns the correct image based on the style.
+  public func image(for style: CKIconStyle) -> Image {
+    let baseName = String(describing: self)
+
+    if CKIconAsset.styledIcons.contains(baseName) {
+      return Image("\\(baseName)\\(style.suffix)", bundle: .module)
+    }
+    return Image(baseName, bundle: .module)
+  }
+
+  /// Indicates whether the icon supports different styles.
+  /// Icons that support multiple styles are stored in ``CKIconAsset.styledIcons``.
+  public var isStylable: Bool { CKIconAsset.styledIcons.contains(rawValue) }
+
+  /// A set of icon names that support styles (Regular / Filled).
+  static let styledIcons: Set<String> = [
+
+""")
+
+generatedCode.append(
+  styledIcons.sorted().map { "    \"\($0)\"" }.joined(separator: ",\n")
+)
+
 generatedCode.append("""
 
-
-  var image: Image { Image(rawValue, bundle: .module) }
+  ]
 }
+
 """)
 
 /// Writes the generated Swift code to the output file.

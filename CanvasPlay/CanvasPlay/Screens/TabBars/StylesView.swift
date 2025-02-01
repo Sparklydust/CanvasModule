@@ -13,6 +13,8 @@ struct StylesView: View {
       PrimarySection("Colors") { ColorsView() }
 
       PrimarySection("Typography") { TypographyView() }
+
+      PrimarySection("Iconography") { IconographyView() }
     }
     .cpPrimaryNavigationStack(title: "Styles")
   }
