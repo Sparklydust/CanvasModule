@@ -12,8 +12,16 @@ struct CanvasBlogApp: App {
 
   var body: some Scene {
     WindowGroup {
-      ContentView()
-        .onAppear { theme.load() }
+      GeometryReader { proxy in
+        ZStack {
+          Color.clear // Expand geometry reader to define `screenSize`.
+
+          ContentView()
+            .environment(\.orientation, UIDevice.current.orientation)
+            .environment(\.screenSize, proxy.size)
+            .onAppear { theme.load() }
+        }
+      }
     }
   }
 }
