@@ -7,7 +7,7 @@ import SwiftUI
 import XCTest
 @testable import CanvasKit
 
-final class TypographySnapshotsTests: XCTestCase {
+final class TypographiesSnapshotsTests: XCTestCase {
 
   func testTypography_largeTitle_snapshotIsEqualToExpected() {
     var result: some View {

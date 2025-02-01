@@ -6,7 +6,7 @@ import CanvasKit
 import SwiftUI
 
 /// Displays all available icons from the design system defined in ``CanvasKit``.
-struct IconographyView: View {
+struct IconographiesView: View {
 
   private let columns = [GridItem(.adaptive(minimum: 50))]
 
@@ -17,11 +17,11 @@ struct IconographyView: View {
       SecondarySection("Others") { othersIcons }
     }
     .listStyle(.plain)
-    .cpSecondaryNavigationStack(title: "Iconography")
+    .cpSecondaryNavigationStack(title: "Iconographies")
   }
 }
 
-extension IconographyView {
+extension IconographiesView {
 
   // MARK: - Regular Icons
   private var regularIcons: some View {
@@ -52,5 +52,5 @@ extension IconographyView {
 }
 
 #Preview {
-  IconographyView()
+  IconographiesView()
 }

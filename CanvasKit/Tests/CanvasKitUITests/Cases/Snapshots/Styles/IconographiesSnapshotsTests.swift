@@ -7,7 +7,7 @@ import SwiftUI
 import XCTest
 @testable import CanvasKit
 
-final class IconographySnapshotsTests: XCTestCase {
+final class IconographiesSnapshotsTests: XCTestCase {
 
   private let columns = [GridItem(.adaptive(minimum: 50))]
 

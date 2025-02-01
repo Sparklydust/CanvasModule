@@ -5,7 +5,7 @@
 import SwiftUI
 
 /// Define spacing values for a SwiftUI view.
-public enum CKSpacing {
+public enum CKSpacing: String, CaseIterable {
 
   case none, x2, x4, x6, x8, x10, x12, x14, x16, x18, x20, x24, x28, x32, x64, x128, x256
 

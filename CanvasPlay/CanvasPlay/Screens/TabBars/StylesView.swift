@@ -4,6 +4,7 @@
 
 import SwiftUI
 
+/// Showcase all available styles from the ``CanvasKit`` design system.
 struct StylesView: View {
 
   @State private var showColors = false
@@ -12,9 +13,11 @@ struct StylesView: View {
     List {
       PrimarySection("Colors") { ColorsView() }
 
-      PrimarySection("Typography") { TypographyView() }
+      PrimarySection("Typographies") { TypographiesView() }
 
-      PrimarySection("Iconography") { IconographyView() }
+      PrimarySection("Iconographies") { IconographiesView() }
+
+      PrimarySection("Spacings") { SpacingsView() }
     }
     .cpPrimaryNavigationStack(title: "Styles")
   }

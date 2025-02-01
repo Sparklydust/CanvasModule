@@ -6,7 +6,7 @@ import CanvasKit
 import SwiftUI
 
 /// Showcase the different typography styles used in the application.
-struct TypographyView: View {
+struct TypographiesView: View {
 
   var body: some View {
     List {
@@ -33,11 +33,11 @@ struct TypographyView: View {
       SecondarySection("Caption 2") { caption2Typography }
     }
     .listStyle(.plain)
-    .cpSecondaryNavigationStack(title: "Typography")
+    .cpSecondaryNavigationStack(title: "Typographies")
   }
 }
 
-extension TypographyView {
+extension TypographiesView {
 
   // MARK: - Large Title
   private var largeTitleTypography: some View {
@@ -371,5 +371,5 @@ extension TypographyView {
 }
 
 #Preview {
-  TypographyView()
+  TypographiesView()
 }
