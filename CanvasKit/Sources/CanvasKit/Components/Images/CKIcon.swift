@@ -54,6 +54,7 @@ public struct CKIcon: View {
         height: size.value * scaleMetric
       )
       .foregroundStyle(color)
+      .accessibilityHidden(true)
   }
 }
 

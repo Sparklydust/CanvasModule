@@ -8,6 +8,9 @@ TEST_ROOT_DIR="CanvasKit/Tests"
 # Base directory where symlinks will be stored.
 SYMLINKS_DIR="ci_scripts/__Snapshots__"
 
+# Remove outdated snapshot files before recreating symlinks
+find "$TEST_ROOT_DIR" -type d -name "__Snapshots__" -exec rm -rf {} +
+
 # Ensure the symlink base directory exists.
 mkdir -p "$SYMLINKS_DIR"
 

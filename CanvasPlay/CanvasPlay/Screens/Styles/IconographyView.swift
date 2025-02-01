@@ -13,8 +13,8 @@ struct IconographyView: View {
   var body: some View {
     List {
       SecondarySection("Regular") { regularIcons }
-      SecondarySection("Bold") { boldIcons }
-      SecondarySection("Brands") { brandsIcons }
+      SecondarySection("Filled") { filledIcons }
+      SecondarySection("Others") { othersIcons }
     }
     .listStyle(.plain)
     .cpSecondaryNavigationStack(title: "Iconography")
@@ -26,26 +26,26 @@ extension IconographyView {
   // MARK: - Regular Icons
   private var regularIcons: some View {
     LazyVGrid(columns: columns, spacing: 16) {
-      ForEach(CKIconAsset.allCases.filter { $0.isStylable }, id: \.self) { asset in
-        IconographyInfoView(asset, style: .regular)
+      ForEach(CKIconAsset.allCases.filter { $0.isStylable }, id: \.self) {
+        IconographyInfoView($0, style: .regular)
       }
     }
   }
 
-  // MARK: - Bold Icons
-  private var boldIcons: some View {
+  // MARK: - Filled Icons
+  private var filledIcons: some View {
     LazyVGrid(columns: columns, spacing: 16) {
-      ForEach(CKIconAsset.allCases.filter { $0.isStylable }, id: \.self) { asset in
-        IconographyInfoView(asset, style: .filled)
+      ForEach(CKIconAsset.allCases.filter { $0.isStylable }, id: \.self) {
+        IconographyInfoView($0, style: .filled)
       }
     }
   }
 
-  // MARK: - Brand Icons
-  private var brandsIcons: some View {
+  // MARK: - Others Icons
+  private var othersIcons: some View {
     LazyVGrid(columns: columns, spacing: 16) {
-      ForEach(CKIconAsset.allCases.filter { !$0.isStylable }, id: \.self) { asset in
-        IconographyInfoView(asset)
+      ForEach(CKIconAsset.allCases.filter { !$0.isStylable }, id: \.self) {
+        IconographyInfoView($0)
       }
     }
   }
