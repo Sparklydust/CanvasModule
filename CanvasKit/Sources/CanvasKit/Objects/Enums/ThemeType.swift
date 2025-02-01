@@ -5,7 +5,7 @@
 import Foundation
 
 /// Represents the available themes for the application.
-enum ThemeType: String {
+public enum ThemeType: String {
 
   /// Key used for saving the selected theme in ``UserDefaults``.
   static let key = "CanvasKitTheme"
