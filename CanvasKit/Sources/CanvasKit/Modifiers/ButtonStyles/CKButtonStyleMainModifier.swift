@@ -19,12 +19,14 @@ extension View {
     variant: CKButtonType.Variant,
     isLoading: Binding<Bool>
   ) -> some View {
-    buttonStyle(CKButtonStyleMain(
-      option: option,
-      style: style,
-      variant: variant,
-      isLoading: isLoading
-    ))
+    buttonStyle(
+      CKButtonStyleMain(
+        option: option,
+        style: style,
+        variant: variant,
+        isLoading: isLoading
+      )
+    )
   }
 }
 
@@ -84,7 +86,7 @@ private struct CKButtonStyleMain: ButtonStyle {
     }
 
     configuration.label
-      .ckFont(.body, weight: .bold)
+      .ckFont(.headline, weight: .bold)
       .ckPadding(.horizontal, .x16)
 
     if case let .icon(_, trailing) = variant, let trailingIcon = trailing {

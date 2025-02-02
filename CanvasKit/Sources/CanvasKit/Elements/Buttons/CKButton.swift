@@ -38,8 +38,13 @@ public struct CKButton: View {
         isLoading: isLoading,
         action: action
       )
-    case let .icon(icon, option, dimension):
-      EmptyView()
+    case let .icon(icon, option, size):
+      CKButtonIcon(
+        icon,
+        option: option,
+        size: size,
+        action: action
+      )
     case let .socialLogin(option, type):
       EmptyView()
     }
@@ -62,7 +67,7 @@ public struct CKButton: View {
 
 #Preview("Icon Button", traits: .sizeThatFitsLayout) {
   CKButton(
-    .icon(.addUser, option: .primary, dimension: 40),
+    .icon(.addUser, option: .primary, size: 40),
     action: {}
   )
 }

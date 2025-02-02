@@ -19,7 +19,7 @@ public enum CKButtonType {
     case icon(
       _ icon: CKIconAsset,
       option: IconOption,
-      dimension: CGFloat
+      size: CGFloat
     )
     case socialLogin(
       option: SocialLoginOption,
