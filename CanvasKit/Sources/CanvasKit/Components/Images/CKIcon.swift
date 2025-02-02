@@ -59,5 +59,5 @@ public struct CKIcon: View {
 }
 
 #Preview {
-  CKIcon(.apple)
+  CKIcon(.appleLogin)
 }

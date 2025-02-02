@@ -38,5 +38,5 @@ public struct IconographyInfoView: View {
 }
 
 #Preview {
-  IconographyInfoView(.apple)
+  IconographyInfoView(.home)
 }

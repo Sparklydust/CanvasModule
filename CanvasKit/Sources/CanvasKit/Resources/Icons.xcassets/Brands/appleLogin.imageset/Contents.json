@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "apple~Light.svg",
+      "filename" : "appleLogin.svg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "appleLogin 1.svg",
       "idiom" : "universal"
     }
   ],
