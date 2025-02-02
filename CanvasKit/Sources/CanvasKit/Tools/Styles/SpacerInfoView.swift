@@ -28,6 +28,6 @@ public struct SpacerInfoView: View {
   }
 }
 
-#Preview {
+#Preview(traits: .sizeThatFitsLayout) {
   SpacerInfoView(spacing: .x10)
 }

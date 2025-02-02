@@ -13,7 +13,11 @@ struct IconographiesView: View {
   var body: some View {
     List {
       SecondarySection("Regular") { regularIcons }
+
       SecondarySection("Filled") { filledIcons }
+
+      SecondarySection("Login") { loginIcons }
+
       SecondarySection("Others") { othersIcons }
     }
     .listStyle(.plain)
@@ -41,11 +45,24 @@ extension IconographiesView {
     }
   }
 
+  // MARK: - Login Icons
+  private var loginIcons: some View {
+    LazyVGrid(columns: columns, spacing: 16) {
+      ForEach(CKIconAsset.allCases.filter { !$0.isStylable }, id: \.self) {
+        if [.facebookLogin, .appleLogin, .googleLogin].contains($0) {
+          IconographyInfoView($0, color: .none)
+        }
+      }
+    }
+  }
+
   // MARK: - Others Icons
   private var othersIcons: some View {
     LazyVGrid(columns: columns, spacing: 16) {
       ForEach(CKIconAsset.allCases.filter { !$0.isStylable }, id: \.self) {
-        IconographyInfoView($0)
+        if ![.facebookLogin, .appleLogin, .googleLogin].contains($0) {
+          IconographyInfoView($0, color: .none)
+        }
       }
     }
   }

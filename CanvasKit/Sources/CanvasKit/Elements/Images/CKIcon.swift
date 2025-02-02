@@ -25,7 +25,7 @@ public struct CKIcon: View {
 
   let asset: CKIconAsset
   let style: CKIconStyle
-  let color: Color
+  let color: Color?
   let size: CKImageSize
 
   /// Initializes a ``CKIcon`` with a given asset, color, and size.
@@ -37,7 +37,7 @@ public struct CKIcon: View {
   public init(
     _ asset: CKIconAsset,
     style: CKIconStyle = .regular,
-    color: Color = .ckPrimary900,
+    color: Color? = .ckPrimary900,
     size: CKImageSize = .medium
   ) {
     self.asset = asset
@@ -48,16 +48,21 @@ public struct CKIcon: View {
 
   public var body: some View {
     asset.image(for: style)
+      .renderingMode(color == .none ? .original : .template)
       .resizable()
       .frame(
         width: size.value * scaleMetric,
         height: size.value * scaleMetric
       )
-      .foregroundStyle(color)
+      .foregroundStyle(color ?? .ckPrimary900)
       .accessibilityHidden(true)
   }
 }
 
-#Preview {
-  CKIcon(.appleLogin)
+#Preview(traits: .sizeThatFitsLayout) {
+  CKIcon(.appleLogin, color: .none)
+}
+
+#Preview(traits: .sizeThatFitsLayout) {
+  CKIcon(.home)
 }

@@ -35,11 +35,27 @@ final class IconographiesSnapshotsTests: XCTestCase {
     assertSnapshot(result)
   }
 
+  func testIconography_loginIcons_snapshotIsEqualToExpected() {
+    var result: some View {
+      LazyVGrid(columns: columns, spacing: 16) {
+        ForEach(CKIconAsset.allCases.filter { !$0.isStylable }, id: \.self) {
+          if [.facebookLogin, .appleLogin, .googleLogin].contains($0) {
+            IconographyInfoView($0, color: .none)
+          }
+        }
+      }
+    }
+
+    assertSnapshot(result)
+  }
+
   func testIconography_othersIcons_snapshotIsEqualToExpected() {
     var result: some View {
       LazyVGrid(columns: columns, spacing: 16) {
         ForEach(CKIconAsset.allCases.filter { !$0.isStylable }, id: \.self) {
-          IconographyInfoView($0)
+          if ![.facebookLogin, .appleLogin, .googleLogin].contains($0) {
+            IconographyInfoView($0, color: .none)
+          }
         }
       }
     }

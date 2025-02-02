@@ -11,32 +11,36 @@ public struct IconographyInfoView: View {
 
   /// The icon asset to display.
   let asset: CKIconAsset
-  /// The style of the icon, defaulting to `.regular`
+  /// The style of the icon, defaulting to `.regular`.
   let style: CKIconStyle
+  /// The color of the icon, default is `ckPrimary900`.
+  let color: Color?
 
   public init(
     _ asset: CKIconAsset,
-    style: CKIconStyle = .regular
+    style: CKIconStyle = .regular,
+    color: Color? = .ckPrimary900
   ) {
     self.asset = asset
     self.style = style
+    self.color = color
   }
 
   public var body: some View {
     VStack(spacing: 4) {
-      CKIcon(asset, style: style)
+      CKIcon(asset, style: style, color: color)
         .frame(width: 40, height: 40)
 
       Text(asset.rawValue)
         .font(.caption)
         .foregroundStyle(.secondary)
         .lineLimit(1)
-        .minimumScaleFactor(0.7)
+        .minimumScaleFactor(0.4)
         .frame(maxWidth: 50)
     }
   }
 }
 
-#Preview {
+#Preview(traits: .sizeThatFitsLayout) {
   IconographyInfoView(.home)
 }

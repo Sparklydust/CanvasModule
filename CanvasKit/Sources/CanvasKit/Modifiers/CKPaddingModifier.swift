@@ -21,7 +21,7 @@ public extension View {
   ///   If you set the value to `nil`, SwiftUI uses a platform-specific default amount. The
   ///   default value of this parameter is `nil`.
   /// - Returns: A view that's padded by the specified amount on the specified edges.
-  func canvasPadding(
+  func ckPadding(
     _ edges: Edge.Set = .all,
     _ length: CKSpacing? = nil
   ) -> some View {
@@ -39,7 +39,7 @@ public extension View {
   /// ```
   /// - Parameter length: The amount, given in ``CKSpacing``, to pad this view on all edges.
   /// - Returns: A view that's padded by the amount you specify.
-  func canvasPadding(_ length: CKSpacing) -> some View {
+  func ckPadding(_ length: CKSpacing) -> some View {
     modifier(CKPaddingModifier(type: .length(length: length)))
   }
 }

@@ -11,7 +11,7 @@ public enum CKButtonType {
   public enum Attribute {
     case main(
       title: String,
-      option: DefaultOption = .primary,
+      option: MainOption = .primary,
       style: Style = .filled,
       variant: Variant = .default,
       isLoading: Binding<Bool> = .constant(false)
@@ -28,7 +28,7 @@ public enum CKButtonType {
   }
 
   /// Defines the default styling options for a button.
-  public enum DefaultOption {
+  public enum MainOption {
     case primary
     case secondary
   }

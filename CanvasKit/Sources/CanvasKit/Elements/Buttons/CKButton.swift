@@ -4,13 +4,13 @@
 
 import SwiftUI
 
+public typealias CKButtonAction = (() async -> Void)
+
 /// A customizable button view that supports various configurations and asynchronous actions.
 ///
 /// ``CKButton`` is a SwiftUI view that creates a button based on a given configuration
 /// defined by ``CKButtonType.Attribute``.
 public struct CKButton: View {
-
-  public typealias CKButtonAction = (() async -> Void)
 
   let type: CKButtonType.Attribute
   let action: CKButtonAction
@@ -30,7 +30,14 @@ public struct CKButton: View {
   public var body: some View {
     switch type {
     case let .main(title, option, style, variant, isLoading):
-      EmptyView()
+      CKButtonMain(
+        title: title,
+        option: option,
+        style: style,
+        variant: variant,
+        isLoading: isLoading,
+        action: action
+      )
     case let .icon(icon, option, dimension):
       EmptyView()
     case let .socialLogin(option, type):
@@ -39,18 +46,30 @@ public struct CKButton: View {
   }
 }
 
-#Preview("Main Button") {
-  CKButton(.main(title: "Continue")) {}
+#Preview("Main Button", traits: .sizeThatFitsLayout) {
+  CKButton(
+    .main(title: "Continue"),
+    action: {}
+  )
 }
 
-#Preview("Main Button - Loading") {
-  CKButton(.main(title: "Continue", isLoading: .constant(true))) {}
+#Preview("Main Button - Loading", traits: .sizeThatFitsLayout) {
+  CKButton(
+    .main(title: "Continue", isLoading: .constant(true)),
+    action: {}
+  )
 }
 
-#Preview("Icon Button") {
-  CKButton(.icon(.addUser, option: .primary, dimension: 40)) {}
+#Preview("Icon Button", traits: .sizeThatFitsLayout) {
+  CKButton(
+    .icon(.addUser, option: .primary, dimension: 40),
+    action: {}
+  )
 }
 
-#Preview("Social Login Button") {
-  CKButton(.socialLogin(option: .apple)) {}
+#Preview("Social Login Button", traits: .sizeThatFitsLayout) {
+  CKButton(
+    .socialLogin(option: .apple),
+    action: {}
+  )
 }
