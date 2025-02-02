@@ -10,7 +10,7 @@ struct CKButtonIcon: View {
   let asset: CKIconAsset
   let option: CKButtonType.IconOption
   let size: CGFloat
-  let action: CKButtonAction
+  let action: CKButtonAsyncAction
 
   /// Creates an instance of ``CKButtonIcon``.
   /// - Parameters:
@@ -22,7 +22,7 @@ struct CKButtonIcon: View {
     _ asset: CKIconAsset,
     option: CKButtonType.IconOption,
     size: CGFloat,
-    action: @escaping CKButtonAction
+    action: @escaping CKButtonAsyncAction
   ) {
     self.asset = asset
     self.option = option

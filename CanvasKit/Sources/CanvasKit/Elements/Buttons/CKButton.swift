@@ -4,7 +4,10 @@
 
 import SwiftUI
 
-public typealias CKButtonAction = (() async -> Void)
+/// A type alias for an asynchronous button action closure.
+///
+/// This represents a function that performs an asynchronous operation when invoked.
+public typealias CKButtonAsyncAction = (() async -> Void)
 
 /// A customizable button view that supports various configurations and asynchronous actions.
 ///
@@ -13,7 +16,7 @@ public typealias CKButtonAction = (() async -> Void)
 public struct CKButton: View {
 
   let type: CKButtonType.Attribute
-  let action: CKButtonAction
+  let action: CKButtonAsyncAction
 
   /// Creates a new instance of ``CKButton`` with the specified configuration and action.
   /// - Parameters:
@@ -21,7 +24,7 @@ public struct CKButton: View {
   ///   - action: An asynchronous closure to perform when the button is pressed.
   public init(
     _ type: CKButtonType.Attribute,
-    action: @escaping CKButtonAction
+    action: @escaping CKButtonAsyncAction
   ) {
     self.type = type
     self.action = action
@@ -46,7 +49,11 @@ public struct CKButton: View {
         action: action
       )
     case let .socialLogin(option, type):
-      EmptyView()
+      CKButtonSocialLogin(
+        option: option,
+        type: type,
+        action: action
+      )
     }
   }
 }

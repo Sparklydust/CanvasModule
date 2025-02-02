@@ -37,29 +37,14 @@ private struct CKButtonStyleMain: ButtonStyle {
   @Environment(\.isEnabled) private var isEnabled
   @State private var state: CKButtonType.State = .default
 
+  /// The main option defining the button type.
   let option: CKButtonType.MainOption
+  /// The style of the button (e.g., filled, rounded).
   let style: CKButtonType.Style
+  /// The variant defining icon placement.
   let variant: CKButtonType.Variant
+  /// A binding tracking whether the button is in a loading state.
   @Binding var isLoading: Bool
-
-  /// Creates a new instance of ``CKButtonStyleMain``.
-  /// - Parameters:
-  ///   - option: The main option defining the button type.
-  ///   - style: The style of the button (e.g., filled, rounded).
-  ///   - variant: The variant defining icon placement.
-  ///   - isLoading: A binding tracking whether the button is in a loading state.
-  init(
-    option: CKButtonType.MainOption,
-    style: CKButtonType.Style,
-    variant: CKButtonType.Variant = .default,
-    isLoading: Binding<Bool>
-  ) {
-    self.option = option
-    self.style = style
-    self.variant = variant
-    _isLoading = isLoading
-  }
-
 
   /// Builds the button's body with dynamic styling.
   /// - Parameter configuration: The button's current configuration.
@@ -90,11 +75,17 @@ private struct CKButtonStyleMain: ButtonStyle {
       .ckPadding(.horizontal, .x16)
 
     if case let .icon(_, trailing) = variant, let trailingIcon = trailing {
-      CKIcon(trailingIcon, style: .regular, color: foregroundColor, size: .custom(20))
+      CKIcon(
+        trailingIcon,
+        style: .regular,
+        color: foregroundColor,
+        size: .custom(20)
+      )
     }
   }
 }
 
+// MARK: - Values
 private extension CKButtonStyleMain {
 
   /// Determines the background color of the button.

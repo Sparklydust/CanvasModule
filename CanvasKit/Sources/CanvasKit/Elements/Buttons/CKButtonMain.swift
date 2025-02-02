@@ -14,7 +14,7 @@ struct CKButtonMain: View {
   let style: CKButtonType.Style
   let variant: CKButtonType.Variant
   @Binding var isLoading: Bool
-  let action: CKButtonAction
+  let action: CKButtonAsyncAction
 
   /// Creates a new instance of ``CKButtonMain``.
   /// - Parameters:
@@ -30,7 +30,7 @@ struct CKButtonMain: View {
     style: CKButtonType.Style,
     variant: CKButtonType.Variant,
     isLoading: Binding<Bool> = .constant(false),
-    action: @escaping CKButtonAction
+    action: @escaping CKButtonAsyncAction
   ) {
     self.title = title
     self.option = option
