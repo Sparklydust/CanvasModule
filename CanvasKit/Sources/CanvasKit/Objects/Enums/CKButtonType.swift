@@ -8,8 +8,8 @@ import SwiftUI
 public enum CKButtonType {
 
   /// Specifies the main attributes for configuring a button.
-  enum MainAttribute {
-    case `default`(
+  public enum Attribute {
+    case main(
       title: String,
       option: DefaultOption = .primary,
       style: Style = .filled,
@@ -17,6 +17,7 @@ public enum CKButtonType {
       isLoading: Binding<Bool> = .constant(false)
     )
     case icon(
+      _ icon: CKIconAsset,
       option: IconOption,
       dimension: CGFloat
     )
@@ -27,26 +28,26 @@ public enum CKButtonType {
   }
 
   /// Defines the default styling options for a button.
-  enum DefaultOption {
+  public enum DefaultOption {
     case primary
     case secondary
   }
 
   /// Specifies the available icon options for a button.
-  enum IconOption {
-    case primary(CKIconAsset)
-    case secondary(CKIconAsset)
-    case tertiary(CKIconAsset)
+  public enum IconOption {
+    case primary
+    case secondary
+    case tertiary
   }
 
   /// Describes the style variations available for a button.
-  enum Style {
+  public enum Style {
     case rounded
     case filled
   }
 
   /// Represents variant configurations for a button.
-  enum Variant {
+  public enum Variant {
     case icon(
       leading: CKIconAsset? = .none,
       trailing: CKIconAsset? = .none
@@ -55,21 +56,21 @@ public enum CKButtonType {
   }
 
   /// Describes the state options for a button.
-  enum State {
+  public enum State {
     case active
     case disabled
     case `default`
   }
 
   /// Specifies the color scheme options for a button.
-  enum ColorScheme {
+  public enum ColorScheme {
     case `default`
     case light
     case dark
   }
 
   /// Defines the social login options available for a button.
-  enum SocialLoginOption {
+  public enum SocialLoginOption {
     case facebook
     case google
     case apple
@@ -93,7 +94,7 @@ public enum CKButtonType {
     }
 
     /// Specifies the button types available for social login.
-    enum ButtonType {
+    public enum ButtonType {
       case icon
       case `default`
     }
