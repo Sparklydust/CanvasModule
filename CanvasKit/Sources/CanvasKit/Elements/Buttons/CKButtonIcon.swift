@@ -5,12 +5,12 @@
 import SwiftUI
 
 /// A button view that displays an icon and executes an asynchronous action when tapped.
-struct CKButtonIcon: View {
+public struct CKButtonIcon: View {
 
   let asset: CKIconAsset
   let option: CKButtonType.IconOption
   let size: CGFloat
-  let action: CKButtonAsyncAction
+  let action: (() async -> Void)
 
   /// Creates an instance of ``CKButtonIcon``.
   /// - Parameters:
@@ -18,11 +18,11 @@ struct CKButtonIcon: View {
   ///   - option: The styling option for the button.
   ///   - size: The size of the icon.
   ///   - action: An asynchronous closure executed when the button is pressed.
-  init(
+  public init(
     _ asset: CKIconAsset,
     option: CKButtonType.IconOption,
     size: CGFloat,
-    action: @escaping CKButtonAsyncAction
+    action: @escaping (() async -> Void)
   ) {
     self.asset = asset
     self.option = option
@@ -30,7 +30,7 @@ struct CKButtonIcon: View {
     self.action = action
   }
 
-  var body: some View {
+  public var body: some View {
     Button(String()) {
       Task { await action() }
     }

@@ -9,20 +9,17 @@ extension View {
   /// Applies the main button style to ``CKButtonMain``.
   /// - Parameters:
   ///   - option: The main option defining the button's primary or secondary type.
-  ///   - style: The style of the button (e.g., filled, rounded).
   ///   - variant: The variant defining icon placement.
   ///   - isLoading: A binding to track the button's loading state.
   /// - Returns: A modified view with the applied button style.
   func ckButtonStyleMain(
     option: CKButtonType.MainOption,
-    style: CKButtonType.Style,
     variant: CKButtonType.Variant,
     isLoading: Binding<Bool>
   ) -> some View {
     buttonStyle(
       CKButtonStyleMain(
         option: option,
-        style: style,
         variant: variant,
         isLoading: isLoading
       )
@@ -37,13 +34,8 @@ private struct CKButtonStyleMain: ButtonStyle {
   @Environment(\.isEnabled) private var isEnabled
   @State private var state: CKButtonType.State = .default
 
-  /// The main option defining the button type.
   let option: CKButtonType.MainOption
-  /// The style of the button (e.g., filled, rounded).
-  let style: CKButtonType.Style
-  /// The variant defining icon placement.
   let variant: CKButtonType.Variant
-  /// A binding tracking whether the button is in a loading state.
   @Binding var isLoading: Bool
 
   /// Builds the button's body with dynamic styling.
@@ -55,10 +47,10 @@ private struct CKButtonStyleMain: ButtonStyle {
       content(for: configuration)
       Spacer()
     }
-    .ckPadding(.vertical, .x18)
+    .ckPadding(.vertical, .x10)
     .foregroundStyle(foregroundColor)
     .background(configuration.isPressed ? onPressBackgroundColor : backgroundColor)
-    .cornerRadius(style == .filled ? CKSpacing.x16.value : 200)
+    .cornerRadius(CKSpacing.x14.value)
     .overlay { CKSpinner() }
     .onChange(of: isEnabled) { updateState(isEnabled: $1, isPressed: configuration.isPressed) }
     .onAppear { updateState(isEnabled: isEnabled, isPressed: configuration.isPressed) }

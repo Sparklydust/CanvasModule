@@ -12,6 +12,10 @@ struct ContentView: View {
       Tab("Styles", systemImage: "paintpalette") {
         StylesView()
       }
+
+      Tab("Elements", systemImage: "rectangle.3.group") {
+        ElementsView()
+      }
     }
   }
 }

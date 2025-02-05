@@ -7,26 +7,6 @@ import SwiftUI
 /// Define the configuration options for a button.
 public enum CKButtonType {
 
-  /// Specifies the main attributes for configuring a button.
-  public enum Attribute {
-    case main(
-      title: String,
-      option: MainOption = .primary,
-      style: Style = .filled,
-      variant: Variant = .default,
-      isLoading: Binding<Bool> = .constant(false)
-    )
-    case icon(
-      _ icon: CKIconAsset,
-      option: IconOption,
-      size: CGFloat
-    )
-    case socialLogin(
-      option: SocialLoginOption,
-      type: SocialLoginOption.ButtonType = .default
-    )
-  }
-
   /// Defines the default styling options for a button.
   public enum MainOption {
     case primary
@@ -40,33 +20,20 @@ public enum CKButtonType {
     case tertiary
   }
 
-  /// Describes the style variations available for a button.
-  public enum Style {
-    case rounded
-    case filled
-  }
-
   /// Represents variant configurations for a button.
   public enum Variant {
+    case `default`
     case icon(
       leading: CKIconAsset? = .none,
       trailing: CKIconAsset? = .none
     )
-    case `default`
   }
 
   /// Describes the state options for a button.
   public enum State {
+    case `default`
     case active
     case disabled
-    case `default`
-  }
-
-  /// Specifies the color scheme options for a button.
-  public enum ColorScheme {
-    case `default`
-    case light
-    case dark
   }
 
   /// Defines the social login options available for a button.
@@ -95,8 +62,8 @@ public enum CKButtonType {
 
     /// Specifies the button types available for social login.
     public enum ButtonType {
-      case icon
       case `default`
+      case icon
     }
   }
 }

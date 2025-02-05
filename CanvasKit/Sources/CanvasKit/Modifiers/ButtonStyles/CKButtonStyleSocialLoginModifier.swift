@@ -43,15 +43,15 @@ private struct CKButtonStyleSocialLoginModifier: ButtonStyle {
           Spacer()
         }
       }
-      .ckPadding(.vertical, .x18)
+      .ckPadding(.vertical, .x14)
       .ckPadding(.horizontal, type == .icon ? .x32 : CKSpacing.none)
       .foregroundStyle(foregroundColor)
       .background(
-        Capsule()
+        RoundedRectangle(cornerRadius: CKSpacing.x16.value)
           .fill(configuration.isPressed ? onPressBackgroundColor : backgroundColor)
       )
       .overlay {
-        Capsule()
+        RoundedRectangle(cornerRadius: CKSpacing.x16.value)
           .stroke(lineWidth: 1.4)
           .fill(borderColor)
       }
