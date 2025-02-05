@@ -17,10 +17,7 @@ struct ContainerTestView<Content: View>: View {
   }
 
   var body: some View {
-    VStack {
-      content
-    }
-    .padding()
-    .background(.ckWhite)
+    content
+      .padding()
   }
 }

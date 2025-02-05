@@ -30,6 +30,9 @@ public extension XCTestCase {
     testName: String = #function,
     line: UInt = #line
   ) {
+    let snapshotView = view
+      .frame(width: size.width, height: size.height)
+      .background(.ckWhite)
 
     let snapshotsDirectory = URL(fileURLWithPath: "\(file)")
       .deletingLastPathComponent()
@@ -37,8 +40,8 @@ public extension XCTestCase {
       .appendingPathComponent(URL(fileURLWithPath: "\(file)").deletingPathExtension().lastPathComponent)
       .path
 
-    let failureMessage = SnapshotTesting.verifySnapshot(
-      of: view.frame(width: size.width, height: size.height),
+    let lightModeFailure = SnapshotTesting.verifySnapshot(
+      of: snapshotView.environment(\.colorScheme, .light),
       as: .image(precision: precision),
       snapshotDirectory: snapshotsDirectory,
       file: file,
@@ -46,8 +49,21 @@ public extension XCTestCase {
       line: line
     )
 
-    if let failureMessage {
-      XCTFail(failureMessage, file: file, line: line)
+    let darkModeFailure = SnapshotTesting.verifySnapshot(
+      of: snapshotView.environment(\.colorScheme, .dark),
+      as: .image(precision: precision),
+      snapshotDirectory: snapshotsDirectory,
+      file: file,
+      testName: testName,
+      line: line
+    )
+
+    if let lightModeFailure {
+      XCTFail(lightModeFailure, file: file, line: line)
+    }
+
+    if let darkModeFailure {
+      XCTFail(darkModeFailure, file: file, line: line)
     }
   }
 }

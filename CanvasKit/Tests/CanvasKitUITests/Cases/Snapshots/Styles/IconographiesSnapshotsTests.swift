@@ -7,13 +7,13 @@ import SwiftUI
 import XCTest
 @testable import CanvasKit
 
-final class IconographiesSnapshotsTests: XCTestCase {
+@MainActor final class IconographiesSnapshotsTests: XCTestCase {
 
   private let columns = [GridItem(.adaptive(minimum: 50))]
 
   func testIconography_regularIcons_snapshotIsEqualToExpected() {
-    var result: some View {
-      LazyVGrid(columns: columns, spacing: 16) {
+    let result = ContainerTestView {
+      LazyVGrid(columns: self.columns, spacing: 16) {
         ForEach(CKIconAsset.allCases.filter { $0.isStylable }, id: \.self) {
           IconographyInfoView($0, style: .regular)
         }
@@ -24,8 +24,8 @@ final class IconographiesSnapshotsTests: XCTestCase {
   }
 
   func testIconography_boldIcons_snapshotIsEqualToExpected() {
-    var result: some View {
-      LazyVGrid(columns: columns, spacing: 16) {
+    let result = ContainerTestView {
+      LazyVGrid(columns: self.columns, spacing: 16) {
         ForEach(CKIconAsset.allCases.filter { $0.isStylable }, id: \.self) {
           IconographyInfoView($0, style: .filled)
         }
@@ -36,8 +36,8 @@ final class IconographiesSnapshotsTests: XCTestCase {
   }
 
   func testIconography_loginIcons_snapshotIsEqualToExpected() {
-    var result: some View {
-      LazyVGrid(columns: columns, spacing: 16) {
+    let result = ContainerTestView {
+      LazyVGrid(columns: self.columns, spacing: 16) {
         ForEach(CKIconAsset.allCases.filter { !$0.isStylable }, id: \.self) {
           if [.facebookLogin, .appleLogin, .googleLogin].contains($0) {
             IconographyInfoView($0, color: .none)
@@ -50,8 +50,8 @@ final class IconographiesSnapshotsTests: XCTestCase {
   }
 
   func testIconography_othersIcons_snapshotIsEqualToExpected() {
-    var result: some View {
-      LazyVGrid(columns: columns, spacing: 16) {
+    let result = ContainerTestView {
+      LazyVGrid(columns: self.columns, spacing: 16) {
         ForEach(CKIconAsset.allCases.filter { !$0.isStylable }, id: \.self) {
           if ![.facebookLogin, .appleLogin, .googleLogin].contains($0) {
             IconographyInfoView($0, color: .none)

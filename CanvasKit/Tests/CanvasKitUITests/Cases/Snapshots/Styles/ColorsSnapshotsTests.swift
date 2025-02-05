@@ -7,10 +7,10 @@ import SwiftUI
 import XCTest
 @testable import CanvasKit
 
-final class ColorsSnapshotsTests: XCTestCase {
+@MainActor final class ColorsSnapshotsTests: XCTestCase {
 
   func testColors_primary_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack {
         Color(.ckPrimary900)
           .colorCard(label: "900")
@@ -49,7 +49,7 @@ final class ColorsSnapshotsTests: XCTestCase {
   }
 
   func testColors_secondary_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack {
         Color(.ckSecondary900)
           .colorCard(label: "900")
@@ -88,7 +88,7 @@ final class ColorsSnapshotsTests: XCTestCase {
   }
 
   func testColors_alertAndStatus_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack {
         Color(.ckSuccess)
           .colorCard(label: "Success")
@@ -115,7 +115,7 @@ final class ColorsSnapshotsTests: XCTestCase {
   }
 
   func testColors_greyscale_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack {
         Color(.ckGreyscale900)
           .colorCard(label: "900")
@@ -154,7 +154,7 @@ final class ColorsSnapshotsTests: XCTestCase {
   }
 
   func testColors_gradients_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack {
         LinearGradient(gradient: .ckBrown)
           .colorCard(label: "Brown")
@@ -187,7 +187,7 @@ final class ColorsSnapshotsTests: XCTestCase {
   }
 
   func testColors_dark_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack {
         Color(.ckDark1)
           .colorCard(label: "Dark 1")
@@ -208,7 +208,7 @@ final class ColorsSnapshotsTests: XCTestCase {
   }
 
   func testColors_others_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack {
         Color(.ckAmber)
           .colorCard(label: "Amber")
@@ -277,7 +277,7 @@ final class ColorsSnapshotsTests: XCTestCase {
   }
 
   func testColors_background_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack {
         Color(.ckBackgroundBlue)
           .colorCard(label: "Blue", labelColor: .gray)
@@ -310,7 +310,7 @@ final class ColorsSnapshotsTests: XCTestCase {
   }
 
   func testColors_transparent_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack {
         Color(.ckTransparentBlue)
           .colorCard(label: "Blue", labelColor: .gray)

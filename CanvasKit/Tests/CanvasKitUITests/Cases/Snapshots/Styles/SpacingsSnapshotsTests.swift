@@ -7,10 +7,10 @@ import SwiftUI
 import XCTest
 @testable import CanvasKit
 
-final class SpacingsSnapshotsTests: XCTestCase {
+@MainActor final class SpacingsSnapshotsTests: XCTestCase {
 
   func testSpacing_all_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack(alignment: .leading) {
         ForEach(CKSpacing.allCases, id: \.self) { space in
           SpacerInfoView(spacing: space)

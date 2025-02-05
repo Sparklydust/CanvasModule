@@ -7,10 +7,10 @@ import SwiftUI
 import XCTest
 @testable import CanvasKit
 
-final class TypographiesSnapshotsTests: XCTestCase {
+@MainActor final class TypographiesSnapshotsTests: XCTestCase {
 
   func testTypography_largeTitle_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack(alignment: .leading) {
         TypographyInfoView(
           font: .largeTitle, weight: .none,
@@ -43,7 +43,7 @@ final class TypographiesSnapshotsTests: XCTestCase {
   }
 
   func testTypography_title_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack(alignment: .leading) {
         TypographyInfoView(
           font: .title, weight: .none,
@@ -76,7 +76,7 @@ final class TypographiesSnapshotsTests: XCTestCase {
   }
 
   func testTypography_title2_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack(alignment: .leading) {
         TypographyInfoView(
           font: .title2, weight: .none,
@@ -109,7 +109,7 @@ final class TypographiesSnapshotsTests: XCTestCase {
   }
 
   func testTypography_title3_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack(alignment: .leading) {
         TypographyInfoView(
           font: .title3, weight: .none,
@@ -142,7 +142,7 @@ final class TypographiesSnapshotsTests: XCTestCase {
   }
 
   func testTypography_headline_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack(alignment: .leading) {
         TypographyInfoView(
           font: .headline, weight: .none,
@@ -175,7 +175,7 @@ final class TypographiesSnapshotsTests: XCTestCase {
   }
 
   func testTypography_subheadline_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack(alignment: .leading) {
         TypographyInfoView(
           font: .subheadline, weight: .none,
@@ -208,7 +208,7 @@ final class TypographiesSnapshotsTests: XCTestCase {
   }
 
   func testTypography_body_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack(alignment: .leading) {
         TypographyInfoView(
           font: .body, weight: .none,
@@ -241,7 +241,7 @@ final class TypographiesSnapshotsTests: XCTestCase {
   }
 
   func testTypography_callout_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack(alignment: .leading) {
         TypographyInfoView(
           font: .callout, weight: .none,
@@ -274,7 +274,7 @@ final class TypographiesSnapshotsTests: XCTestCase {
   }
 
   func testTypography_footnote_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack(alignment: .leading) {
         TypographyInfoView(
           font: .footnote, weight: .none,
@@ -307,7 +307,7 @@ final class TypographiesSnapshotsTests: XCTestCase {
   }
 
   func testTypography_caption_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack(alignment: .leading) {
         TypographyInfoView(
           font: .caption, weight: .none,
@@ -340,7 +340,7 @@ final class TypographiesSnapshotsTests: XCTestCase {
   }
 
   func testTypography_caption2_snapshotIsEqualToExpected() {
-    var result: some View {
+    let result = ContainerTestView {
       VStack(alignment: .leading) {
         TypographyInfoView(
           font: .caption2, weight: .none,
