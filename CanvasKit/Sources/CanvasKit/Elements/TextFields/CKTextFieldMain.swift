@@ -18,7 +18,7 @@ struct CKTextFieldMain: View {
   let axis: Axis
   let focusOption: TextFieldFocus
   @Binding var focusState: TextFieldFocus?
-  let trailingIcon: CKIcon?
+  let trailingIcon: CKIconAsset?
   let trailingIconAction: () async -> Void
 
   /// Initializes a primary text field with customizable properties.
@@ -38,7 +38,7 @@ struct CKTextFieldMain: View {
     lineLimit: Int,
     focusOption: TextFieldFocus,
     focusState: Binding<TextFieldFocus?>,
-    trailingIcon: CKIcon?,
+    trailingIcon: CKIconAsset?,
     trailingIconAction: @escaping () async -> Void
   ) {
     self.placeholder = placeholder
@@ -53,6 +53,13 @@ struct CKTextFieldMain: View {
 
   var body: some View {
     TextField(placeholder, text: $text, axis: axis)
+      .focused($isFocused)
+      .ckTextFieldStyle(
+        text: text,
+        isFocused: focusState == focusOption,
+        trailingIcon: trailingIcon,
+        trailingIconAction: trailingIconAction
+      )
       .lineLimit(lineLimit)
       .focused($isFocused)
       .onTapGesture { isFocused = true }

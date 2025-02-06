@@ -45,55 +45,18 @@ private struct CKButtonStyleSocialLoginModifier: ButtonStyle {
       }
       .ckPadding(.vertical, .x14)
       .ckPadding(.horizontal, type == .icon ? .x32 : CKSpacing.none)
-      .foregroundStyle(foregroundColor)
+      .foregroundStyle(colorScheme == .dark ? .ckWhite : .ckGreyscale900)
       .background(
         RoundedRectangle(cornerRadius: CKSpacing.x16.value)
-          .fill(configuration.isPressed ? onPressBackgroundColor : backgroundColor)
+          .fill(
+            configuration.isPressed
+            ? colorScheme == .dark ? .ckDark1 : .ckGreyscale200
+            : colorScheme == .dark ? .ckDark2 : .ckWhite)
       )
       .overlay {
         RoundedRectangle(cornerRadius: CKSpacing.x16.value)
           .stroke(lineWidth: 1.4)
-          .fill(borderColor)
+          .fill(colorScheme == .dark ? .ckDark4 : .ckGreyscale200)
       }
-  }
-}
-
-// MARK: - Values
-extension CKButtonStyleSocialLoginModifier {
-
-  /// The background color based on the color scheme.
-  var backgroundColor: Color {
-    switch colorScheme {
-    case .light: .ckWhite
-    case .dark: .ckDark2
-    @unknown default: .ckWhite
-    }
-  }
-
-  /// The border color based on the color scheme.
-  var borderColor: Color {
-    switch colorScheme {
-    case .light: .ckGreyscale200
-    case .dark: .ckDark4
-    @unknown default: .ckGreyscale200
-    }
-  }
-
-  /// The background color when the button is pressed.
-  var onPressBackgroundColor: Color {
-    switch colorScheme {
-    case .light: .ckGreyscale200
-    case .dark: .ckDark1
-    @unknown default: .ckWhite
-    }
-  }
-
-  /// The foreground color based on the color scheme.
-  var foregroundColor: Color {
-    switch colorScheme {
-    case .light: .ckGreyscale900
-    case .dark: .ckWhite
-    @unknown default: .ckWhite
-    }
   }
 }

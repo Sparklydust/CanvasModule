@@ -52,9 +52,12 @@ private struct CKButtonStyleIconModifier: ButtonStyle {
     .cornerRadius(cornerRadius)
     .overlay(
       RoundedRectangle(cornerRadius: cornerRadius)
-        .stroke(.ckGreyscale300, lineWidth: addBorderColor ? 1.4 : 0)
+        .stroke(
+          .ckGreyscale300,
+          lineWidth: option == .secondary && colorScheme == .light ? 1.4 : 0
+        )
     )
-    .if(addShadow) { $0.ckShadow(.buttonShadow1) }
+    .if(option != .secondary) { $0.ckShadow(.buttonShadow1) }
     .aspectRatio(1, contentMode: .fit)
   }
 }
@@ -64,58 +67,30 @@ private extension CKButtonStyleIconModifier {
 
   /// Determines the background color of the button.
   var backgroundColor: Color {
-    switch (option, colorScheme) {
-    case (.primary, _): .ckPrimary900
-    case (.secondary, .light): .ckWhite
-    case (.secondary, .dark): .ckDark2
-    case (.tertiary, _): .ckPrimary900
-    @unknown default: .ckPrimary900
+    switch option {
+    case .primary, .tertiary: .ckPrimary900
+    case .secondary: colorScheme == .dark ? .ckDark2 : .ckWhite
     }
   }
 
   /// Determines the background color of the button when pressed.
   var onPressBackgroundColor: Color {
-    switch (option, colorScheme) {
-    case (.primary, _): .ckPrimary800
-    case (.secondary, .light): .ckPrimary50
-    case (.secondary, .dark): .ckDark3
-    case (.tertiary, _): .ckPrimary800
-    @unknown default: .ckPrimary800
+    switch option {
+    case .primary, .tertiary: .ckPrimary800
+    case .secondary: colorScheme == .dark ? .ckDark3 : .ckPrimary50
     }
   }
 
   /// Determines the foreground color of the button icon.
   var foregroundColor: Color {
-    switch (option, colorScheme) {
-    case (.primary, _): .ckWhite
-    case (.secondary, .light): .ckPrimary900
-    case (.secondary, .dark): .ckWhite
-    case (.tertiary, _): .ckWhite
-    @unknown default: .ckWhite
+    switch option {
+    case .primary, .tertiary: .ckWhite
+    case .secondary: colorScheme == .dark ? .ckWhite : .ckPrimary900
     }
   }
 
   /// Defines the button's corner radius based on its style.
   var cornerRadius: CGFloat {
-    switch option {
-    case .primary: size / 2
-    case .secondary, .tertiary: CKSpacing.x6.value
-    }
-  }
-
-  /// Determines whether to add a border around the button.
-  var addBorderColor: Bool {
-    switch (option, colorScheme) {
-    case (.secondary, .light): true
-    default: false
-    }
-  }
-
-  /// Determines whether to apply a shadow to the button.
-  var addShadow: Bool {
-    switch option {
-    case .primary, .tertiary: true
-    default: false
-    }
+    option == .primary ? size / 2 : CKSpacing.x6.value
   }
 }
