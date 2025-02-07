@@ -16,12 +16,16 @@ let package = Package(
     )
   ],
   dependencies: [
+    .package(url: "https://github.com/marmelroy/PhoneNumberKit", from: "4.0.0"),
     .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.17.6"),
     .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", from: "6.6.0")
   ],
   targets: [
     .target(
       name: "CanvasKit",
+      dependencies: [
+        .product(name: "PhoneNumberKit", package: "PhoneNumberKit")
+      ],
       resources: [.process("Resources")],
       plugins: [
         .plugin(name: "IconsProcessor"),

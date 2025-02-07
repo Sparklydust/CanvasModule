@@ -44,12 +44,7 @@ public struct CKTextFieldPassword: View {
         isFocused: focusState == focusOption,
         leadingIcon: .lock,
         trailingIcon: showPassword ? .show : .hide,
-        trailingIconAction: {
-          showPassword.toggle()
-          try? await Task.sleep(for: .microseconds(100))
-          isFocused = true
-          focusState = focusOption
-        }
+        trailingIconAction: { await toggleShowPassword() }
       )
       .onTapGesture { isFocused = true }
       .onChange(of: focusState) {
@@ -67,6 +62,18 @@ public struct CKTextFieldPassword: View {
           focusState = .none
         }
       }
+  }
+}
+
+// MARK: - Actions
+private extension CKTextFieldPassword {
+
+  /// Hide or show password within the text field.
+  func toggleShowPassword() async {
+    showPassword.toggle()
+    try? await Task.sleep(for: .microseconds(100))
+    isFocused = true
+    focusState = focusOption
   }
 }
 
