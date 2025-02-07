@@ -75,9 +75,10 @@ public struct CKTextFieldMain: View {
 }
 
 #Preview("Main Text Field - Focused", traits: .sizeThatFitsLayout) {
-  CKTextFieldMain(
+  @Previewable @State var text = String()
+  return CKTextFieldMain(
     placeholder: "Username",
-    text: .constant(String()),
+    text: $text,
     axis: .horizontal,
     lineLimit: 1,
     focusOption: .init(id: 1),
@@ -88,9 +89,10 @@ public struct CKTextFieldMain: View {
 }
 
 #Preview("Main Text Field - Unfocused", traits: .sizeThatFitsLayout) {
-  CKTextFieldMain(
+  @Previewable @State var text = String()
+  return CKTextFieldMain(
     placeholder: "Username",
-    text: .constant(String()),
+    text: $text,
     axis: .horizontal,
     lineLimit: 1,
     focusOption: .init(id: 1),

@@ -4,10 +4,11 @@
 
 import SwiftUI
 
-/// A text field for entering an email address.
-public struct CKTextFieldEmail: View {
+/// A text field designed for entering a secret password.
+public struct CKTextFieldPassword: View {
 
   @FocusState private var isFocused: Bool
+  @State private var showPassword: Bool = false
 
   @Binding var text: String
   let focusOption: TextFieldFocus
@@ -29,18 +30,36 @@ public struct CKTextFieldEmail: View {
   }
 
   public var body: some View {
-    TextField("Email", text: $text)
-      .keyboardType(.emailAddress)
+    TextField("Password", text: $text)
+      .opacity(showPassword ? 1 : 0)
+      .overlay {
+        SecureField("Password", text: $text)
+          .opacity(showPassword ? 0 : 1)
+      }
       .autocapitalization(.none)
       .disableAutocorrection(true)
       .focused($isFocused)
       .ckTextFieldStyle(
         text: text,
         isFocused: focusState == focusOption,
-        leadingIcon: .message
+        leadingIcon: .lock,
+        trailingIcon: showPassword ? .show : .hide,
+        trailingIconAction: {
+          showPassword.toggle()
+          try? await Task.sleep(for: .microseconds(100))
+          isFocused = true
+          focusState = focusOption
+        }
       )
       .onTapGesture { isFocused = true }
-      .onChange(of: focusState) { isFocused = $1 == focusOption }
+      .onChange(of: focusState) {
+        isFocused = $1 == focusOption
+
+        // Enter secured mode when resigning from first responder.
+        if $1 != focusOption {
+          showPassword = false
+        }
+      }
       .onChange(of: isFocused) { _, newValue in
         if newValue {
           focusState = focusOption
@@ -51,18 +70,18 @@ public struct CKTextFieldEmail: View {
   }
 }
 
-#Preview("Email Text Field - Focused", traits: .sizeThatFitsLayout) {
+#Preview("Password Text Field - Focused", traits: .sizeThatFitsLayout) {
   @Previewable @State var text = String()
-  return CKTextFieldEmail(
+  return CKTextFieldPassword(
     text: $text,
     focusOption: .init(id: 1),
     focusState: .constant(.init(id: 1))
   )
 }
 
-#Preview("Email Text Field - Unfocused", traits: .sizeThatFitsLayout) {
+#Preview("Password Text Field - Unfocused", traits: .sizeThatFitsLayout) {
   @Previewable @State var text = String()
-  return CKTextFieldEmail(
+  return CKTextFieldPassword(
     text: $text,
     focusOption: .init(id: 1),
     focusState: .constant(.none)

@@ -51,16 +51,19 @@ public struct CKTextFieldUsername: View {
 }
 
 #Preview("Username Text Field - Focused", traits: .sizeThatFitsLayout) {
-  CKTextFieldUsername(
-    text: .constant(String()),
+  @Previewable @State var text = String()
+  return CKTextFieldUsername(
+    text: $text,
     focusOption: .init(id: 1),
-    focusState: .constant(.init(id: 1))
+    focusState: .constant(.init(id: 1)
+                         )
   )
 }
 
 #Preview("Username Text Field - Unfocused", traits: .sizeThatFitsLayout) {
-  CKTextFieldUsername(
-    text: .constant(String()),
+  @Previewable @State var text = String()
+  return CKTextFieldUsername(
+    text: $text,
     focusOption: .init(id: 1),
     focusState: .constant(.none)
   )
