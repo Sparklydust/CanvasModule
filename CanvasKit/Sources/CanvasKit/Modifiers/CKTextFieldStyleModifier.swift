@@ -82,7 +82,7 @@ private struct CKTextFieldStyleModifier: ViewModifier {
   func body(content: Content) -> some View {
     HStack(spacing: .zero) {
       if let leadingIcon {
-        CKIcon(leadingIcon, color: iconColor, size: .custom(20))
+        CKIcon(leadingIcon, style: .filled, color: iconColor, size: .medium)
           .ckPadding(.trailing, .x12)
       }
 
@@ -92,7 +92,7 @@ private struct CKTextFieldStyleModifier: ViewModifier {
         .frame(maxWidth: .infinity)
 
       if let trailingIcon {
-        CKIcon(trailingIcon, color: iconColor, size: .custom(20))
+        CKIcon(trailingIcon, style: .filled, color: iconColor, size: .medium)
           .ckPadding(.leading, .x12)
           .onTapGesture { Task { await trailingIconAction() }}
       }
@@ -104,8 +104,9 @@ private struct CKTextFieldStyleModifier: ViewModifier {
     }
     .frame(maxWidth: isCode ? nil : .infinity, alignment: .leading)
     .ckPadding(.horizontal, isCode ? .x32 : .x20)
-    .ckPadding(.vertical, isCode ? .x16 : .x18)
-    .background(foregroundColor)
+    .ckPadding(.vertical, isCode ? .x12 : .x14)
+    .foregroundStyle(foregroundColor)
+    .background(backgroundColor)
     .cornerRadius(CKSpacing.x16.value)
     .overlay(
       RoundedRectangle(cornerRadius: CKSpacing.x16.value)

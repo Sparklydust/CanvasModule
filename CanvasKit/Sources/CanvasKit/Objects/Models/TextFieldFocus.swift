@@ -5,7 +5,7 @@
 import Foundation
 
 /// Represents the focus state of a text field.
-struct TextFieldFocus: Equatable {
+public struct TextFieldFocus: Equatable {
 
   /// The unique identifier of the focused text field.
   let id: Int

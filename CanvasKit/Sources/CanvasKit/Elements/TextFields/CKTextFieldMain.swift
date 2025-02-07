@@ -8,7 +8,7 @@ import SwiftUI
 ///
 /// ``CKTextFieldMain`` serves as the default text input component. It is designed to be the
 /// base implementation for standard text input fields in the application.
-struct CKTextFieldMain: View {
+public struct CKTextFieldMain: View {
 
   @FocusState private var isFocused: Bool
 
@@ -31,7 +31,7 @@ struct CKTextFieldMain: View {
   ///   - focusState: A binding to track the current focus state.
   ///   - trailingIcon: An optional trailing icon for additional interaction.
   ///   - trailingIconAction: An asynchronous action triggered by the trailing icon.
-  init(
+  public init(
     placeholder: String,
     text: Binding<String>,
     axis: Axis,
@@ -51,7 +51,7 @@ struct CKTextFieldMain: View {
     self.trailingIconAction = trailingIconAction
   }
 
-  var body: some View {
+  public var body: some View {
     TextField(placeholder, text: $text, axis: axis)
       .focused($isFocused)
       .ckTextFieldStyle(
@@ -63,6 +63,7 @@ struct CKTextFieldMain: View {
       .lineLimit(lineLimit)
       .focused($isFocused)
       .onTapGesture { isFocused = true }
+      .onChange(of: focusState) { isFocused = $1 == focusOption }
       .onChange(of: isFocused) { _, newValue in
         if newValue {
           focusState = focusOption
@@ -70,19 +71,29 @@ struct CKTextFieldMain: View {
           focusState = .none
         }
       }
-      .onChange(of: focusState) { _, newValue in
-        isFocused = newValue == focusOption
-      }
   }
 }
 
-#Preview {
+#Preview("Main Text Field - Focused", traits: .sizeThatFitsLayout) {
   CKTextFieldMain(
     placeholder: "Username",
     text: .constant(String()),
     axis: .horizontal,
     lineLimit: 1,
-    focusOption: TextFieldFocus(id: 1),
+    focusOption: .init(id: 1),
+    focusState: .constant(.init(id: 1)),
+    trailingIcon: .none,
+    trailingIconAction: {}
+  )
+}
+
+#Preview("Main Text Field - Unfocused", traits: .sizeThatFitsLayout) {
+  CKTextFieldMain(
+    placeholder: "Username",
+    text: .constant(String()),
+    axis: .horizontal,
+    lineLimit: 1,
+    focusOption: .init(id: 1),
     focusState: .constant(.none),
     trailingIcon: .none,
     trailingIconAction: {}
