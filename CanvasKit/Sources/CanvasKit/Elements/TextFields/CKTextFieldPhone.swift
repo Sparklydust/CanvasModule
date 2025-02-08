@@ -6,7 +6,7 @@ import PhoneNumberKit
 import SwiftUI
 
 /// A text field designed for entering a phone number with formatting capability.
-public struct CKTextFieldPhone: View {
+public struct CKTextFieldPhone<Focus: Equatable>: View {
 
   @FocusState private var isFocused: Bool
   @State private var regionID: String = "FR"
@@ -16,8 +16,8 @@ public struct CKTextFieldPhone: View {
   private let phoneNumberUtility = PhoneNumberUtility()
 
   @Binding var text: String
-  let focusOption: TextFieldFocus
-  @Binding var focusState: TextFieldFocus?
+  let focusOption: Focus
+  @Binding var focusState: Focus?
 
   /// Initializes a username text field with focus handling.
   /// - Parameters:
@@ -26,8 +26,8 @@ public struct CKTextFieldPhone: View {
   ///   - focusState: A binding to track the current focus state.
   public init(
     text: Binding<String>,
-    focusOption: TextFieldFocus,
-    focusState: Binding<TextFieldFocus?>
+    focusOption: Focus,
+    focusState: Binding<Focus?>
   ) {
     _text = text
     self.focusOption = focusOption
@@ -85,9 +85,8 @@ private extension CKTextFieldPhone {
   @Previewable @State var text = String()
   CKTextFieldPhone(
     text: $text,
-    focusOption: .init(id: 1),
-    focusState: .constant(.init(id: 1)
-                         )
+    focusOption: 1,
+    focusState: .constant(1)
   )
 }
 
@@ -95,7 +94,7 @@ private extension CKTextFieldPhone {
   @Previewable @State var text = String()
   CKTextFieldPhone(
     text: $text,
-    focusOption: .init(id: 1),
+    focusOption: 1,
     focusState: .constant(.none)
   )
 }

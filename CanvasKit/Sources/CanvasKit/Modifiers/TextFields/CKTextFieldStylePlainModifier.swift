@@ -69,7 +69,8 @@ private struct CKTextFieldStylePlainModifier: ViewModifier {
       HStack(spacing: .zero) {
         content
           .lineSpacing(.zero)
-          .ckFont(.headline, weight: .bold)
+          .ckFont(.body, weight: .regular)
+          .ckPadding(.leading, .x4)
 
         if let trailingIconAction {
           CKIcon(.arrowRight, style: .regular, color: iconColor)
@@ -85,7 +86,7 @@ private struct CKTextFieldStylePlainModifier: ViewModifier {
       CKDivider(color: .ckPrimary900)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
-    .foregroundStyle(foregroundColor)
+    .foregroundStyle(colorScheme == .dark ? .ckWhite : .ckGreyscale500)
   }
 }
 
@@ -94,15 +95,6 @@ private extension CKTextFieldStylePlainModifier {
   /// Determines the text field mode.
   var mode: CKTextFieldMode {
     isFocused ? .focused : (text.isEmpty ? .default : .filled)
-  }
-
-  /// Determines the foreground color.
-  var foregroundColor: Color {
-    switch mode {
-    case .focused: colorScheme == .dark ? .ckDark4 : .ckGreyscale500
-    case .filled: colorScheme == .dark ? .ckWhite : .ckGreyscale900
-    default: colorScheme == .dark ? .ckDark4 : .ckGreyscale500
-    }
   }
 
   /// Determines the color of the trailing icon.

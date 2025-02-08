@@ -23,7 +23,7 @@ extension View {
     isCode: Bool = false,
     leadingIcon: CKIconAsset? = .none,
     trailingIcon: CKIconAsset? = .none,
-    trailingIconAction: @escaping () async -> Void = {}
+    trailingIconAction: (() async -> Void)? = .none
   ) -> some View {
     modifier(
       CKTextFieldStyleDefaultModifier(
@@ -48,7 +48,7 @@ private struct CKTextFieldStyleDefaultModifier: ViewModifier {
   let font: (style: CKFontStyle, weight: CKFontWeight)
   let isCode: Bool
   let trailingIcon: CKIconAsset?
-  var trailingIconAction: () async -> Void
+  var trailingIconAction: (() async -> Void)?
 
   /// Initializes a text field style modifier.
   /// - Parameters:
@@ -66,7 +66,7 @@ private struct CKTextFieldStyleDefaultModifier: ViewModifier {
     isCode: Bool = false,
     leadingIcon: CKIconAsset?,
     trailingIcon: CKIconAsset?,
-    trailingIconAction: @escaping () async -> Void
+    trailingIconAction: (() async -> Void)?
   ) {
     self.text = text
     self.isFocused = isFocused
@@ -94,7 +94,7 @@ private struct CKTextFieldStyleDefaultModifier: ViewModifier {
       if let trailingIcon {
         CKIcon(trailingIcon, style: .filled, color: iconColor, size: .medium)
           .ckPadding(.leading, .x12)
-          .onTapGesture { Task { await trailingIconAction() }}
+          .onTapGesture { Task { await trailingIconAction?() }}
       }
     }
     .if(isCode) { view in
@@ -103,11 +103,11 @@ private struct CKTextFieldStyleDefaultModifier: ViewModifier {
         .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
     }
     .frame(maxWidth: isCode ? nil : .infinity, alignment: .leading)
-    .ckPadding(.horizontal, isCode ? .x32 : .x20)
-    .ckPadding(.vertical, isCode ? .x12 : .x14)
+    .ckPadding(.horizontal, isCode ? .x28 : .x18)
+    .ckPadding(.vertical, isCode ? .x10 : .x12)
     .foregroundStyle(foregroundColor)
     .background(backgroundColor)
-    .cornerRadius(CKSpacing.x16.value)
+    .cornerRadius(CKSpacing.x14.value)
     .overlay(
       RoundedRectangle(cornerRadius: CKSpacing.x16.value)
         .strokeBorder(mode == .focused ? .ckPrimary900 : .clear, lineWidth: 2)

@@ -8,8 +8,8 @@ import SwiftUI
 public struct CKTextFieldPasscode: View {
 
   @FocusState private var isFocused: Bool
-  @State private var focusState: TextFieldFocus?
-  let initialFocusOption = TextFieldFocus(id: .zero)
+  @State private var focusState: TextFieldPasscodeFocus?
+  let initialFocusOption = TextFieldPasscodeFocus(id: .zero)
 
   let length: Int
   @Binding var text: String
@@ -69,12 +69,12 @@ private extension CKTextFieldPasscode {
 
   /// Returns a `TextFieldFocus` object for the given index.
   /// - Parameter id: The index of the passcode character.
-  func focusFor(_ id: Int) -> TextFieldFocus {
-    TextFieldFocus(id: id)
+  func focusFor(_ id: Int) -> TextFieldPasscodeFocus {
+    TextFieldPasscodeFocus(id: id)
   }
 
   /// Updates the focus state based on the text input.
-  func updatedFocusState() -> TextFieldFocus? {
+  func updatedFocusState() -> TextFieldPasscodeFocus? {
     isFocused ? focusFor(min(text.count, length - 1)) : nil
   }
 

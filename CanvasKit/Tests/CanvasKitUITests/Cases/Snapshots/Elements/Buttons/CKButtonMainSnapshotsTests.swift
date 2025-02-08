@@ -12,11 +12,11 @@ import XCTest
   func testButton_mains_snapshotIsEqualToExpected() {
     let result = ContainerTestView {
       VStack {
-        ButtonsInfoView(title: "option primary - default variant") {
+        ElementInfoView(title: "option primary - default variant") {
           CKButtonMain(title: "Continue", action: {})
         }
 
-        ButtonsInfoView(title: "option primary - icons variant") {
+        ElementInfoView(title: "option primary - icons variant") {
           CKButtonMain(
             title: "Continue",
             variant: .icon(leading: .addUser, trailing: .arrowRight),
@@ -24,7 +24,7 @@ import XCTest
           )
         }
 
-        ButtonsInfoView(title: "option primary - leading icon variant") {
+        ElementInfoView(title: "option primary - leading icon variant") {
           CKButtonMain(
             title: "Continue",
             variant: .icon(leading: .addUser),
@@ -32,7 +32,7 @@ import XCTest
           )
         }
 
-        ButtonsInfoView(title: "option primary - trailing icon variant") {
+        ElementInfoView(title: "option primary - trailing icon variant") {
           CKButtonMain(
             title: "Continue",
             variant: .icon(trailing: .arrowRight),
@@ -40,12 +40,12 @@ import XCTest
           )
         }
 
-        ButtonsInfoView(title: "option primary - disabled") {
+        ElementInfoView(title: "option primary - disabled") {
           CKButtonMain(title: "Continue", action: {})
             .disabled(true)
         }
 
-        ButtonsInfoView(title: "option secondary - default variant") {
+        ElementInfoView(title: "option secondary - default variant") {
           CKButtonMain(
             title: "Cancel",
             option: .secondary,
@@ -53,7 +53,7 @@ import XCTest
           )
         }
 
-        ButtonsInfoView(title: "option secondary - icons variant") {
+        ElementInfoView(title: "option secondary - icons variant") {
           CKButtonMain(
             title: "Cancel",
             option: .secondary,
@@ -62,7 +62,7 @@ import XCTest
           )
         }
 
-        ButtonsInfoView(title: "option secondary - leading icon variant") {
+        ElementInfoView(title: "option secondary - leading icon variant") {
           CKButtonMain(
             title: "Cancel",
             option: .secondary,
@@ -71,7 +71,7 @@ import XCTest
           )
         }
 
-        ButtonsInfoView(title: "option secondary - trailing icon variant") {
+        ElementInfoView(title: "option secondary - trailing icon variant") {
           CKButtonMain(
             title: "Cancel",
             option: .secondary,
@@ -80,7 +80,7 @@ import XCTest
           )
         }
 
-        ButtonsInfoView(title: "option secondary - disabled") {
+        ElementInfoView(title: "option secondary - disabled") {
           CKButtonMain(
             title: "Cancel",
             option: .secondary,

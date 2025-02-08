@@ -13,19 +13,19 @@ import XCTest
     let result = ContainerTestView {
       HStack {
         Spacer()
-        ButtonsInfoView(title: "Apple") {
+        ElementInfoView(title: "Apple") {
           CKButtonSocialLogin(option: .apple, type: .icon, action: {})
         }
 
         Spacer()
 
-        ButtonsInfoView(title: "Facebook") {
+        ElementInfoView(title: "Facebook") {
           CKButtonSocialLogin(option: .facebook, type: .icon, action: {})
         }
 
         Spacer()
 
-        ButtonsInfoView(title: "Google") {
+        ElementInfoView(title: "Google") {
           CKButtonSocialLogin(option: .google, type: .icon, action: {})
         }
         Spacer()
@@ -38,15 +38,15 @@ import XCTest
   func testButton_socialLoginsDefault_snapshotIsEqualToExpected() {
     let result = ContainerTestView {
       VStack {
-        ButtonsInfoView(title: "Apple") {
+        ElementInfoView(title: "Apple") {
           CKButtonSocialLogin(option: .apple, type: .default, action: {})
         }
 
-        ButtonsInfoView(title: "Facebook") {
+        ElementInfoView(title: "Facebook") {
           CKButtonSocialLogin(option: .facebook, type: .default, action: {})
         }
 
-        ButtonsInfoView(title: "Google") {
+        ElementInfoView(title: "Google") {
           CKButtonSocialLogin(option: .google, type: .default, action: {})
         }
       }

@@ -5,14 +5,14 @@
 import SwiftUI
 
 /// A text field designed for entering a secret password.
-public struct CKTextFieldPassword: View {
+public struct CKTextFieldPassword<Focus: Equatable>: View {
 
   @FocusState private var isFocused: Bool
   @State private var showPassword: Bool = false
 
   @Binding var text: String
-  let focusOption: TextFieldFocus
-  @Binding var focusState: TextFieldFocus?
+  let focusOption: Focus
+  @Binding var focusState: Focus?
 
   /// Initializes a username text field with focus handling.
   /// - Parameters:
@@ -21,8 +21,8 @@ public struct CKTextFieldPassword: View {
   ///   - focusState: A binding to track the current focus state.
   public init(
     text: Binding<String>,
-    focusOption: TextFieldFocus,
-    focusState: Binding<TextFieldFocus?>
+    focusOption: Focus,
+    focusState: Binding<Focus?>
   ) {
     _text = text
     self.focusOption = focusOption
@@ -81,8 +81,8 @@ private extension CKTextFieldPassword {
   @Previewable @State var text = String()
   CKTextFieldPassword(
     text: $text,
-    focusOption: .init(id: 1),
-    focusState: .constant(.init(id: 1))
+    focusOption: 1,
+    focusState: .constant(1)
   )
 }
 
@@ -90,7 +90,7 @@ private extension CKTextFieldPassword {
   @Previewable @State var text = String()
   CKTextFieldPassword(
     text: $text,
-    focusOption: .init(id: 1),
+    focusOption: 1,
     focusState: .constant(.none)
   )
 }

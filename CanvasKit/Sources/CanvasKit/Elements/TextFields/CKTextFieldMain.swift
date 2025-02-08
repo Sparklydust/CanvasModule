@@ -5,7 +5,7 @@
 import SwiftUI
 
 /// The primary text field used in most cases.
-public struct CKTextFieldMain: View {
+public struct CKTextFieldMain<Focus: Equatable>: View {
 
   @FocusState private var isFocused: Bool
 
@@ -13,10 +13,10 @@ public struct CKTextFieldMain: View {
   @Binding var text: String
   let lineLimit: Int
   let axis: Axis
-  let focusOption: TextFieldFocus
-  @Binding var focusState: TextFieldFocus?
+  let focusOption: Focus
+  @Binding var focusState: Focus?
   let trailingIcon: CKIconAsset?
-  let trailingIconAction: () async -> Void
+  let trailingIconAction: (() async -> Void)?
 
   /// Initializes a primary text field with customizable properties.
   /// - Parameters:
@@ -31,12 +31,12 @@ public struct CKTextFieldMain: View {
   public init(
     placeholder: String,
     text: Binding<String>,
-    axis: Axis,
-    lineLimit: Int,
-    focusOption: TextFieldFocus,
-    focusState: Binding<TextFieldFocus?>,
-    trailingIcon: CKIconAsset?,
-    trailingIconAction: @escaping () async -> Void
+    axis: Axis = .horizontal,
+    lineLimit: Int = 1,
+    focusOption: Focus,
+    focusState: Binding<Focus?>,
+    trailingIcon: CKIconAsset? = .none,
+    trailingIconAction: (() async -> Void)? = .none
   ) {
     self.placeholder = placeholder
     _text = text
@@ -78,8 +78,8 @@ public struct CKTextFieldMain: View {
     text: $text,
     axis: .horizontal,
     lineLimit: 1,
-    focusOption: .init(id: 1),
-    focusState: .constant(.init(id: 1)),
+    focusOption: 1,
+    focusState: .constant(1),
     trailingIcon: .none,
     trailingIconAction: {}
   )
@@ -92,9 +92,9 @@ public struct CKTextFieldMain: View {
     text: $text,
     axis: .horizontal,
     lineLimit: 1,
-    focusOption: .init(id: 1),
+    focusOption: 1,
     focusState: .constant(.none),
-    trailingIcon: .none,
-    trailingIconAction: {}
+    trailingIcon: .delete,
+    trailingIconAction: { text = String() }
   )
 }

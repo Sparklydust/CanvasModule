@@ -10,6 +10,8 @@ struct ElementsView: View {
   var body: some View {
     List {
       PrimarySection("Buttons") { ButtonsView() }
+
+      PrimarySection("Text Fields") { TextFieldsView() }
     }
     .cpPrimaryNavigationStack(title: "Elements")
   }

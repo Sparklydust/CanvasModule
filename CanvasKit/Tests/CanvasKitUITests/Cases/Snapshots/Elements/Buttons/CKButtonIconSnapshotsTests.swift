@@ -13,19 +13,19 @@ import XCTest
     let result = ContainerTestView {
       HStack {
         Spacer()
-        ButtonsInfoView(title: "primary") {
+        ElementInfoView(title: "primary") {
           CKButtonIcon(.addUser, option: .primary, size: 40, action: {})
         }
 
         Spacer()
 
-        ButtonsInfoView(title: "secondary") {
+        ElementInfoView(title: "secondary") {
           CKButtonIcon(.addUser, option: .secondary, size: 40, action: {})
         }
 
         Spacer()
 
-        ButtonsInfoView(title: "tertiary") {
+        ElementInfoView(title: "tertiary") {
           CKButtonIcon(.addUser, option: .tertiary, size: 40, action: {})
         }
         Spacer()

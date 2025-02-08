@@ -5,13 +5,13 @@
 import SwiftUI
 
 /// A text field for entering an email address.
-public struct CKTextFieldEmail: View {
+public struct CKTextFieldEmail<Focus: Equatable>: View {
 
   @FocusState private var isFocused: Bool
 
   @Binding var text: String
-  let focusOption: TextFieldFocus
-  @Binding var focusState: TextFieldFocus?
+  let focusOption: Focus
+  @Binding var focusState: Focus?
 
   /// Initializes a username text field with focus handling.
   /// - Parameters:
@@ -20,8 +20,8 @@ public struct CKTextFieldEmail: View {
   ///   - focusState: A binding to track the current focus state.
   public init(
     text: Binding<String>,
-    focusOption: TextFieldFocus,
-    focusState: Binding<TextFieldFocus?>
+    focusOption: Focus,
+    focusState: Binding<Focus?>
   ) {
     _text = text
     self.focusOption = focusOption
@@ -55,8 +55,8 @@ public struct CKTextFieldEmail: View {
   @Previewable @State var text = String()
   CKTextFieldEmail(
     text: $text,
-    focusOption: .init(id: 1),
-    focusState: .constant(.init(id: 1))
+    focusOption: 1,
+    focusState: .constant(1)
   )
 }
 
@@ -64,7 +64,7 @@ public struct CKTextFieldEmail: View {
   @Previewable @State var text = String()
   CKTextFieldEmail(
     text: $text,
-    focusOption: .init(id: 1),
+    focusOption: 1,
     focusState: .constant(.none)
   )
 }

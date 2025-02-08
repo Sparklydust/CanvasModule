@@ -5,15 +5,15 @@
 import SwiftUI
 
 /// A plain text field with optional focus handling and a trailing icon action.
-public struct CKTextFieldPlain: View {
+public struct CKTextFieldPlain<Focus: Equatable>: View {
 
   @FocusState private var isFocused: Bool
 
   let title: String
   let placeholder: String
   @Binding var text: String
-  let focusOption: TextFieldFocus
-  @Binding var focusState: TextFieldFocus?
+  let focusOption: Focus
+  @Binding var focusState: Focus?
   let trailingIconAction: ((Bool) async -> Void)?
 
   /// Initializes a plain text field with a title, placeholder, and focus behavior.
@@ -28,8 +28,8 @@ public struct CKTextFieldPlain: View {
     title: String,
     placeholder: String = String(),
     text: Binding<String>,
-    focusOption: TextFieldFocus,
-    focusState: Binding<TextFieldFocus?>,
+    focusOption: Focus,
+    focusState: Binding<Focus?>,
     trailingIconAction: ((Bool) async -> Void)? = nil
   ) {
     self.title = title
@@ -67,8 +67,8 @@ public struct CKTextFieldPlain: View {
     title: "Username",
     placeholder: "Enter your username",
     text: $text,
-    focusOption: .init(id: 1),
-    focusState: .constant(.init(id: 1)),
+    focusOption: 1,
+    focusState: .constant(1),
     trailingIconAction: { _ in })
 }
 
@@ -78,7 +78,7 @@ public struct CKTextFieldPlain: View {
     title: "Username",
     placeholder: "Enter your username",
     text: $text,
-    focusOption: .init(id: 1),
+    focusOption: 1,
     focusState: .constant(.none),
     trailingIconAction: { _ in })
 }

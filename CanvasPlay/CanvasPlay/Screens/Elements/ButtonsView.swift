@@ -29,19 +29,19 @@ extension ButtonsView {
   var iconButtons: some View {
     HStack {
       Spacer()
-      ButtonsInfoView(title: "primary") {
+      ElementInfoView(title: "primary") {
         CKButtonIcon(.addUser, option: .primary, size: 40, action: {})
       }
 
       Spacer()
 
-      ButtonsInfoView(title: "secondary") {
+      ElementInfoView(title: "secondary") {
         CKButtonIcon(.addUser, option: .secondary, size: 40, action: {})
       }
 
       Spacer()
 
-      ButtonsInfoView(title: "tertiary") {
+      ElementInfoView(title: "tertiary") {
         CKButtonIcon(.addUser, option: .tertiary, size: 40, action: {})
       }
       Spacer()
@@ -51,11 +51,11 @@ extension ButtonsView {
   // MARK: - Main Buttons
   var mainButtons: some View {
     VStack {
-      ButtonsInfoView(title: "option primary - default variant") {
+      ElementInfoView(title: "option primary - default variant") {
         CKButtonMain(title: "Continue", action: {})
       }
 
-      ButtonsInfoView(title: "option primary - icons variant") {
+      ElementInfoView(title: "option primary - icons variant") {
         CKButtonMain(
           title: "Continue",
           variant: .icon(leading: .addUser, trailing: .arrowRight),
@@ -63,7 +63,7 @@ extension ButtonsView {
         )
       }
 
-      ButtonsInfoView(title: "option primary - leading icon variant") {
+      ElementInfoView(title: "option primary - leading icon variant") {
         CKButtonMain(
           title: "Continue",
           variant: .icon(leading: .addUser),
@@ -71,7 +71,7 @@ extension ButtonsView {
         )
       }
 
-      ButtonsInfoView(title: "option primary - trailing icon variant") {
+      ElementInfoView(title: "option primary - trailing icon variant") {
         CKButtonMain(
           title: "Continue",
           variant: .icon(trailing: .arrowRight),
@@ -79,12 +79,12 @@ extension ButtonsView {
         )
       }
 
-      ButtonsInfoView(title: "option primary - disabled") {
+      ElementInfoView(title: "option primary - disabled") {
         CKButtonMain(title: "Continue", action: {})
           .disabled(true)
       }
 
-      ButtonsInfoView(title: "option secondary - default variant") {
+      ElementInfoView(title: "option secondary - default variant") {
         CKButtonMain(
           title: "Cancel",
           option: .secondary,
@@ -92,7 +92,7 @@ extension ButtonsView {
         )
       }
 
-      ButtonsInfoView(title: "option secondary - icons variant") {
+      ElementInfoView(title: "option secondary - icons variant") {
         CKButtonMain(
           title: "Cancel",
           option: .secondary,
@@ -101,7 +101,7 @@ extension ButtonsView {
         )
       }
 
-      ButtonsInfoView(title: "option secondary - leading icon variant") {
+      ElementInfoView(title: "option secondary - leading icon variant") {
         CKButtonMain(
           title: "Cancel",
           option: .secondary,
@@ -110,7 +110,7 @@ extension ButtonsView {
         )
       }
 
-      ButtonsInfoView(title: "option secondary - trailing icon variant") {
+      ElementInfoView(title: "option secondary - trailing icon variant") {
         CKButtonMain(
           title: "Cancel",
           option: .secondary,
@@ -119,7 +119,7 @@ extension ButtonsView {
         )
       }
 
-      ButtonsInfoView(title: "option secondary - disabled") {
+      ElementInfoView(title: "option secondary - disabled") {
         CKButtonMain(
           title: "Cancel",
           option: .secondary,
@@ -133,15 +133,15 @@ extension ButtonsView {
   // MARK: - Social Login - Default
   var socialLoginsDefaultButtons: some View {
     VStack {
-      ButtonsInfoView(title: "Apple") {
+      ElementInfoView(title: "Apple") {
         CKButtonSocialLogin(option: .apple, type: .default, action: {})
       }
 
-      ButtonsInfoView(title: "Facebook") {
+      ElementInfoView(title: "Facebook") {
         CKButtonSocialLogin(option: .facebook, type: .default, action: {})
       }
 
-      ButtonsInfoView(title: "Google") {
+      ElementInfoView(title: "Google") {
         CKButtonSocialLogin(option: .google, type: .default, action: {})
       }
     }
@@ -151,19 +151,19 @@ extension ButtonsView {
   var socialLoginsIconButtons: some View {
     HStack {
       Spacer()
-      ButtonsInfoView(title: "Apple") {
+      ElementInfoView(title: "Apple") {
         CKButtonSocialLogin(option: .apple, type: .icon, action: {})
       }
 
       Spacer()
 
-      ButtonsInfoView(title: "Facebook") {
+      ElementInfoView(title: "Facebook") {
         CKButtonSocialLogin(option: .facebook, type: .icon, action: {})
       }
 
       Spacer()
 
-      ButtonsInfoView(title: "Google") {
+      ElementInfoView(title: "Google") {
         CKButtonSocialLogin(option: .google, type: .icon, action: {})
       }
       Spacer()

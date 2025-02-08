@@ -4,27 +4,27 @@
 
 import SwiftUI
 
-/// Displays a button with its associated type as title.
-public struct ButtonsInfoView<Content: View>: View {
+/// Displays a ``CanvasKit`` elements with its associated style as title.
+public struct ElementInfoView<Content: View>: View {
 
   let title: String
-  @ViewBuilder let button: () -> Content
-  
-  /// Initialize an instance of ``ButtonsInfoView``.
+  @ViewBuilder let element: () -> Content
+
+  /// Initialize an instance of ``ElementInfoView``.
   /// - Parameters:
-  ///   - title: The title displayed to showcase the type of the button.
-  ///   - button: A closure that provides the button view.
+  ///   - title: The title displayed to showcase the element's type.
+  ///   - element: A closure that provides the element view.
   public init(
     title: String,
-    button: @escaping () -> Content
+    element: @escaping () -> Content
   ) {
     self.title = title
-    self.button = button
+    self.element = element
   }
 
   public var body: some View {
     VStack {
-      button()
+      element()
 
       Text(title)
         .ckFont(.callout)
@@ -35,7 +35,7 @@ public struct ButtonsInfoView<Content: View>: View {
 }
 
 #Preview {
-  ButtonsInfoView(title: "main") {
+  ElementInfoView(title: "main") {
     CKButtonMain(
       title: "Continue",
       option: .primary,
