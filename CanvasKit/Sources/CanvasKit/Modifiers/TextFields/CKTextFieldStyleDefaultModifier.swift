@@ -16,7 +16,7 @@ extension View {
   ///   - trailingIcon: An optional trailing icon.
   ///   - trailingIconAction: An asynchronous action triggered when the trailing icon is tapped.
   /// - Returns: A view modified with the custom text field styling.
-  func ckTextFieldStyle(
+  func ckTextFieldStyleDefault(
     text: String,
     isFocused: Bool,
     font: (style: CKFontStyle, weight: CKFontWeight) = (.body, .regular),
@@ -26,7 +26,7 @@ extension View {
     trailingIconAction: @escaping () async -> Void = {}
   ) -> some View {
     modifier(
-      CKTextFieldStyleModifier(
+      CKTextFieldStyleDefaultModifier(
         text: text,
         isFocused: isFocused,
         font: font,
@@ -40,7 +40,7 @@ extension View {
 }
 
 /// Applies a custom text field style modifier.
-private struct CKTextFieldStyleModifier: ViewModifier {
+private struct CKTextFieldStyleDefaultModifier: ViewModifier {
 
   let text: String
   let isFocused: Bool
@@ -117,7 +117,7 @@ private struct CKTextFieldStyleModifier: ViewModifier {
 }
 
 // MARK: - Values
-private extension CKTextFieldStyleModifier {
+private extension CKTextFieldStyleDefaultModifier {
 
   /// Determines the mode of the text field based on its focus and content.
   var mode: CKTextFieldMode {

@@ -34,7 +34,7 @@ public struct CKTextFieldEmail: View {
       .autocapitalization(.none)
       .disableAutocorrection(true)
       .focused($isFocused)
-      .ckTextFieldStyle(
+      .ckTextFieldStyleDefault(
         text: text,
         isFocused: focusState == focusOption,
         leadingIcon: .message
@@ -53,7 +53,7 @@ public struct CKTextFieldEmail: View {
 
 #Preview("Email Text Field - Focused", traits: .sizeThatFitsLayout) {
   @Previewable @State var text = String()
-  return CKTextFieldEmail(
+  CKTextFieldEmail(
     text: $text,
     focusOption: .init(id: 1),
     focusState: .constant(.init(id: 1))
@@ -62,7 +62,7 @@ public struct CKTextFieldEmail: View {
 
 #Preview("Email Text Field - Unfocused", traits: .sizeThatFitsLayout) {
   @Previewable @State var text = String()
-  return CKTextFieldEmail(
+  CKTextFieldEmail(
     text: $text,
     focusOption: .init(id: 1),
     focusState: .constant(.none)

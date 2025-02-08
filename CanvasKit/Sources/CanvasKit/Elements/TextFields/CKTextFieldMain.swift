@@ -4,10 +4,7 @@
 
 import SwiftUI
 
-/// The primary text field used in most cases, providing focus management and customization.
-///
-/// ``CKTextFieldMain`` serves as the default text input component. It is designed to be the
-/// base implementation for standard text input fields in the application.
+/// The primary text field used in most cases.
 public struct CKTextFieldMain: View {
 
   @FocusState private var isFocused: Bool
@@ -54,7 +51,7 @@ public struct CKTextFieldMain: View {
   public var body: some View {
     TextField(placeholder, text: $text, axis: axis)
       .focused($isFocused)
-      .ckTextFieldStyle(
+      .ckTextFieldStyleDefault(
         text: text,
         isFocused: focusState == focusOption,
         trailingIcon: trailingIcon,
@@ -76,7 +73,7 @@ public struct CKTextFieldMain: View {
 
 #Preview("Main Text Field - Focused", traits: .sizeThatFitsLayout) {
   @Previewable @State var text = String()
-  return CKTextFieldMain(
+  CKTextFieldMain(
     placeholder: "Username",
     text: $text,
     axis: .horizontal,
@@ -90,7 +87,7 @@ public struct CKTextFieldMain: View {
 
 #Preview("Main Text Field - Unfocused", traits: .sizeThatFitsLayout) {
   @Previewable @State var text = String()
-  return CKTextFieldMain(
+  CKTextFieldMain(
     placeholder: "Username",
     text: $text,
     axis: .horizontal,

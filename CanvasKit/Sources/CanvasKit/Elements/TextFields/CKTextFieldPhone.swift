@@ -41,12 +41,12 @@ public struct CKTextFieldPhone: View {
         .keyboardType(.phonePad)
         .focused($isFocused)
     }
-    .ckTextFieldStyle(
+    .ckTextFieldStyleDefault(
       text: text,
       isFocused: focusState == focusOption
     )
     .onTapGesture { isFocused = true }
-    .onChange(of: text) { processPhoneNumber($1) }
+    .onChange(of: text) { try? processPhoneNumber($1) }
     .onChange(of: focusState) { isFocused = $1 == focusOption }
     .onChange(of: isFocused) { _, newValue in
       if newValue {
@@ -63,15 +63,11 @@ private extension CKTextFieldPhone {
 
   /// Parses and formats a phone number while extracting the region ID.
   /// - Parameter number: The phone number to process and format.
-  func processPhoneNumber(_ number: String) {
-    do {
-      let formattedNumber = partialFormatter.formatPartial(number)
-      let phoneNumber = try phoneNumberUtility.parse(formattedNumber)
-      text = phoneNumberUtility.format(phoneNumber, toType: .international)
-      regionID = phoneNumber.regionID ?? "FR"
-    } catch {
-      print("Invalid phone number: \(number)")
-    }
+  func processPhoneNumber(_ number: String) throws {
+    let formattedNumber = partialFormatter.formatPartial(number)
+    let phoneNumber = try phoneNumberUtility.parse(formattedNumber)
+    text = phoneNumberUtility.format(phoneNumber, toType: .international)
+    regionID = phoneNumber.regionID ?? "FR"
   }
 
   /// Returns the flag emoji for a given country code.
@@ -87,7 +83,7 @@ private extension CKTextFieldPhone {
 
 #Preview("Phone Text Field - Focused", traits: .sizeThatFitsLayout) {
   @Previewable @State var text = String()
-  return CKTextFieldPhone(
+  CKTextFieldPhone(
     text: $text,
     focusOption: .init(id: 1),
     focusState: .constant(.init(id: 1)
@@ -97,7 +93,7 @@ private extension CKTextFieldPhone {
 
 #Preview("Phone Text Field - Unfocused", traits: .sizeThatFitsLayout) {
   @Previewable @State var text = String()
-  return CKTextFieldPhone(
+  CKTextFieldPhone(
     text: $text,
     focusOption: .init(id: 1),
     focusState: .constant(.none)

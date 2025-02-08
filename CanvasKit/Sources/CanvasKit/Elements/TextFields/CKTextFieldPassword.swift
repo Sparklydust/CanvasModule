@@ -39,7 +39,7 @@ public struct CKTextFieldPassword: View {
       .autocapitalization(.none)
       .disableAutocorrection(true)
       .focused($isFocused)
-      .ckTextFieldStyle(
+      .ckTextFieldStyleDefault(
         text: text,
         isFocused: focusState == focusOption,
         leadingIcon: .lock,
@@ -79,7 +79,7 @@ private extension CKTextFieldPassword {
 
 #Preview("Password Text Field - Focused", traits: .sizeThatFitsLayout) {
   @Previewable @State var text = String()
-  return CKTextFieldPassword(
+  CKTextFieldPassword(
     text: $text,
     focusOption: .init(id: 1),
     focusState: .constant(.init(id: 1))
@@ -88,7 +88,7 @@ private extension CKTextFieldPassword {
 
 #Preview("Password Text Field - Unfocused", traits: .sizeThatFitsLayout) {
   @Previewable @State var text = String()
-  return CKTextFieldPassword(
+  CKTextFieldPassword(
     text: $text,
     focusOption: .init(id: 1),
     focusState: .constant(.none)

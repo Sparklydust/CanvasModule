@@ -33,7 +33,7 @@ public struct CKTextFieldUsername: View {
       .autocapitalization(.none)
       .disableAutocorrection(true)
       .focused($isFocused)
-      .ckTextFieldStyle(
+      .ckTextFieldStyleDefault(
         text: text,
         isFocused: focusState == focusOption,
         leadingIcon: .profile
@@ -52,7 +52,7 @@ public struct CKTextFieldUsername: View {
 
 #Preview("Username Text Field - Focused", traits: .sizeThatFitsLayout) {
   @Previewable @State var text = String()
-  return CKTextFieldUsername(
+  CKTextFieldUsername(
     text: $text,
     focusOption: .init(id: 1),
     focusState: .constant(.init(id: 1)
@@ -62,7 +62,7 @@ public struct CKTextFieldUsername: View {
 
 #Preview("Username Text Field - Unfocused", traits: .sizeThatFitsLayout) {
   @Previewable @State var text = String()
-  return CKTextFieldUsername(
+  CKTextFieldUsername(
     text: $text,
     focusOption: .init(id: 1),
     focusState: .constant(.none)
