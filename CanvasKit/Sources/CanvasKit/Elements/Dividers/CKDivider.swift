@@ -9,32 +9,32 @@ public struct CKDivider: View {
 
   @Environment(\.colorScheme) var colorScheme
 
-  public enum Axes {
+  public enum Axis {
     case horizontal
     case vertical
   }
 
-  let axes: Axes
+  let axis: Axis
   let color: Color?
 
   /// Initializes a divider with the specified orientation and optional color.
    /// - Parameters:
-   ///   - axes: The orientation of the divider, either horizontal or vertical. Defaults to horizontal.
+   ///   - axis: The orientation of the divider, either horizontal or vertical. Defaults to horizontal.
    ///   - color: An optional custom color for the divider. If `nil`, it adapts to the color scheme.
   public init(
-    axes: Axes = .horizontal,
+    axis: Axis = .horizontal,
     color: Color? = .none
   ) {
     self.color = color
-    self.axes = axes
+    self.axis = axis
   }
 
   public var body: some View {
     RoundedRectangle(cornerRadius: 2)
       .fill(color ?? (colorScheme == .dark ? .ckDark4 : .ckGreyscale200))
       .frame(
-        width: axes == .vertical ? 1 : nil,
-        height: axes == .horizontal ? 1 : nil
+        width: axis == .vertical ? 1 : .none,
+        height: axis == .horizontal ? 1 : .none
       )
   }
 }

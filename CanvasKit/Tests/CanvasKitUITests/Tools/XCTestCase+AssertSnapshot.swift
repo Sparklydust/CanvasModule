@@ -32,7 +32,7 @@ public extension XCTestCase {
   ) {
     let snapshotView = view
       .frame(width: size.width, height: size.height)
-      .background(.ckWhite)
+      .background(.ckBackgroundMain)
 
     let snapshotsDirectory = URL(fileURLWithPath: "\(file)")
       .deletingLastPathComponent()

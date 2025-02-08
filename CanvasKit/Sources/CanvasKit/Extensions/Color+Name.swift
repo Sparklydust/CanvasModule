@@ -20,6 +20,7 @@ public extension Color {
   static let ckBackgroundBrown = Color(.ckBackgroundBrown)
   static let ckBackgroundGreen = Color(.ckBackgroundGreen)
   static let ckBackgroundOrange = Color(.ckBackgroundOrange)
+  static let ckBackgroundMain = Color(.ckBackgroundMain)
   static let ckBackgroundPurple = Color(.ckBackgroundPurple)
   static let ckBackgroundRed = Color(.ckBackgroundRed)
   static let ckBackgroundTeal = Color(.ckBackgroundTeal)

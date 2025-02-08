@@ -20,6 +20,7 @@ public extension ShapeStyle where Self == Color {
   static var ckBackgroundBrown: SwiftUI.Color { .init(.ckBackgroundBrown) }
   static var ckBackgroundGreen: SwiftUI.Color { .init(.ckBackgroundGreen) }
   static var ckBackgroundOrange: SwiftUI.Color { .init(.ckBackgroundOrange) }
+  static var ckBackgroundMain: SwiftUI.Color { .init(.ckBackgroundMain) }
   static var ckBackgroundPurple: SwiftUI.Color { .init(.ckBackgroundPurple) }
   static var ckBackgroundRed: SwiftUI.Color { .init(.ckBackgroundRed) }
   static var ckBackgroundTeal: SwiftUI.Color { .init(.ckBackgroundTeal) }
